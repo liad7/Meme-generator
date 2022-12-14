@@ -31,7 +31,7 @@ function renderImg(img) {
 
 function renderTexts(lines) {
     lines.forEach(line => {
-        renderText(line)
+        drawText(line)
     })
 }
 
@@ -39,22 +39,58 @@ function onSetLineTxt(ev, txt) {
     ev.preventDefault()
     const line = setLineTxt(txt)
     renderMeme()
-    // renderText(line)
+
 }
 
-function renderText(line) {
-    const { txt, size, align, color } = line
-    // gCtx.beginPath()
-    gCtx.font = `${size}px serif`
-    gCtx.fillText(txt, gX+30, gY+30)
-    // gCtx.fillText(txt, 10, 50)
+// function renderText(line) {
+//     const { txt, size, align, color, id } = line
+//     gCtx.font = `${size}px serif`
+//     const { x, y } = getPos(id)
+//     gCtx.fillText(txt, x, y)
+//     // gCtx.fillText(txt, 10, 50)
+//     gCtx.fillStyle = color
+// }
+
+function drawText(line) {
+    const { txt, size, align, color, id } = line
+    console.log(color)
+    gCtx.lineWidth = 1
+    gCtx.strokeStyle = 'white'
     gCtx.fillStyle = color
+    gCtx.font = `${size}px serif`
+    gCtx.textAlign = align
+    gCtx.textBaseline = 'middle'
+
+    const { x, y } = getPos(id)
+    gCtx.fillText(txt, x, y)
+    gCtx.strokeText(txt, x, y)
+
+    // gCtx.fillText(text, x, y) // Draws (fills) a given text at the given (x, y) position.
+    // gCtx.strokeText(text, x, y) // Draws (strokes) a given text at the given (x, y) position.
 }
 
-function onSetColor(color){
+function onSetColor(color) {
     setColor(color)
+    renderMeme()
 }
 
-function onSetSize(diff){
+function onSetSize(diff) {
     setSize(diff)
+    renderMeme()
+}
+
+function onSwitchLine() {
+    document.querySelector('input[name="text"]').value = switchLine()
+}
+
+function getPos(lineId) {
+    var pos = { x: 10, y: 10 }
+    // console.log(getLineIdxById(lineId))
+    if (getLineIdxById(lineId) === 1) pos.y = gElCanvas.height - 10
+    return pos
+}
+
+function onNewLine() {
+    document.querySelector('input[name="text"]').value = ''
+    newLine()
 }

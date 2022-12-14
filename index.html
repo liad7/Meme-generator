@@ -29,8 +29,10 @@
     <section class="editor">
         <canvas height="450" width="450"></canvas>
         <div class="controllers">
-            <input type="text" oninput="onSetLineTxt(event,value)" placeholder="Add text...">
+            <input type="text" name="text" oninput="onSetLineTxt(event,value)" placeholder="Add text...">
             <input type="color" onchange="onSetColor(value)">
+            <button onclick="onNewLine()">+</button>
+            <button onclick="onSwitchLine()">↑↓</button>
             <button onclick="onSetSize(5)">+A</button>
             <button onclick="onSetSize(-5)">-A</button>
         </div>

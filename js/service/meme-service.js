@@ -12,10 +12,9 @@ function initService() {
 
 function createMeme() {
     var meme = _loadMemeFromStorage()
-    console.log(meme)
     if (!meme) {
         meme = {
-            selectedImgId: 1,
+            selectedImgId: '1',
             selectedLineIdx: 0,
             lines: []
         }
@@ -39,10 +38,10 @@ function getImgs() {
 }
 
 function setImg(imgId) {
-    return setMeme(imgId,0)
+    return setMeme(imgId, 0)
 }
 
-function setMeme(selectedImgId,selectedLineIdx,lines = []) {
+function setMeme(selectedImgId = '1', selectedLineIdx = 0, lines = []) {
     const meme = {
         selectedImgId,
         selectedLineIdx,
@@ -62,6 +61,45 @@ function setLineTxt(txt) {
     const line = createLine(txt)
     _saveMemeToStorage()
     return line
+}
+
+function switchLine() {
+    const {lines} = gMeme
+    gMeme.selectedLineIdx++
+    if (gMeme.selectedLineIdx > lines.length-1) gMeme.selectedLineIdx = 0
+    console.log('curr line',gMeme.selectedLineIdx)
+    return lines[gMeme.selectedLineIdx].txt
+}
+
+function newLine() {
+    console.log(gMeme.selectedLineIdx)
+    if (!gMeme.lines[gMeme.selectedLineIdx]) return
+    gMeme.selectedLineIdx++
+    console.log(gMeme.selectedLineIdx)
+}
+
+function getLineIdxById(lineId) {
+    return gMeme.lines.findIndex(line => lineId === line.id)
+}
+
+function setColor(color) {
+    const {lines,selectedLineIdx} = gMeme
+    lines[selectedLineIdx].color = color
+    _saveMemeToStorage()
+}
+
+function setAlign(align) {
+    const {lines,selectedLineIdx} = gMeme
+    lines[selectedLineIdx].align = align
+    _saveMemeToStorage()
+}
+
+function setSize(diff) {
+    const {lines,selectedLineIdx} = gMeme
+    const line = lines[selectedLineIdx]
+    if (line.size + diff > 100 || line.size + diff < 10) return 
+    line.size += diff
+    _saveMemeToStorage()
 }
 
 function _saveMemeToStorage() {
