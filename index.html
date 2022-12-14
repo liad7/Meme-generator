@@ -30,6 +30,9 @@
         <canvas height="450" width="450"></canvas>
         <div class="controllers">
             <input type="text" oninput="onSetLineTxt(event,value)" placeholder="Add text...">
+            <input type="color" onchange="onSetColor(value)">
+            <button onclick="onSetSize(5)">+A</button>
+            <button onclick="onSetSize(-5)">-A</button>
         </div>
     </section>
     <footer></footer>
@@ -37,6 +40,7 @@
 
     <script src="js/service/storage-service.js"></script>
     <script src="js/service/utils-service.js"></script>
+    <script src="js/service/canvas-service.js"></script>
     <script src="js/service/meme-service.js"></script>
     <script src="js/gallery-controller.js"></script>
     <script src="js/meme-controller.js"></script>

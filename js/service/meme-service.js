@@ -54,9 +54,7 @@ function setMeme(selectedImgId,selectedLineIdx,lines = []) {
 }
 
 function getImgById(imgId) {
-    console.log(imgId);
     const img = gImgs.find(img => imgId === img.id)
-    console.log(img)
     return img
 }
 
@@ -66,22 +64,7 @@ function setLineTxt(txt) {
     return line
 }
 
-function createLine(txt, size = 15, align = 'left', color = '#ffffff') {
-    const { lines, selectedLineIdx } = gMeme
-    const line = { txt, size, align, color }
-    lines[selectedLineIdx] = line
-    console.log(gMeme)
-    // gMeme.lines.push(line)
-    return line
-}
-
-// function createMeme(){
-//     gMeme = _loadMemeFromStorage()
-//     if(!gMeme) 
-// }
-
 function _saveMemeToStorage() {
-    console.log('here')
     saveToStorage(MEME_KEY, gMeme)
 }
 
