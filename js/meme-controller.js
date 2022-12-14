@@ -6,6 +6,7 @@ var gCtx
 
 function onInit() {
     initService()
+    renderGallery()
     renderMeme()
 }
 function renderMeme() {
@@ -13,7 +14,7 @@ function renderMeme() {
     gCtx = gElCanvas.getContext('2d')
     const img = new Image()
     const meme = getMeme()
-    img.src = getMemeImgUrl()
+    img.src = getImgUrl()
     img.onload = () => {
         renderImg(img)
         renderTexts(meme.lines)  ///why doesnt work with one

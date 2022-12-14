@@ -3,39 +3,61 @@
 
 const MEME_KEY = 'memeDB'
 
-var gImgs = [{ id: 1, url: '../meme-imgs/1.jpg', keywords: [] },{ id: 1, url: '../meme-imgs/1.jpg', keywords: [] }]
+var gImgs = [{ id: '1', url: '../meme-imgs/1.jpg', keywords: [] }, { id: '2', url: '../meme-imgs/2.jpg', keywords: [] }]
 var gMeme
 
-function initService(){
+function initService() {
     createMeme()
 }
 
 function createMeme() {
-    var meme = _loadMemeToStorage()
-    console.log(meme);
+    var meme = _loadMemeFromStorage()
+    console.log(meme)
     if (!meme) {
         meme = {
             selectedImgId: 1,
             selectedLineIdx: 0,
             lines: []
         }
+        console.log(gMeme)
     }
     gMeme = meme
     _saveMemeToStorage()
 }
 
-function getMemeImgUrl() {
-    const meme = getMemeById(gMeme.selectedImgId)
-    return meme.url
+function getImgUrl() {
+    const img = getImgById(gMeme.selectedImgId)
+    return img.url
 }
 
 function getMeme() {
     return gMeme
 }
 
-function getMemeById(memeId) {
-    const meme = gImgs.find(img => memeId === img.id)
+function getImgs() {
+    return gImgs
+}
+
+function setImg(imgId) {
+    return setMeme(imgId,0)
+}
+
+function setMeme(selectedImgId,selectedLineIdx,lines = []) {
+    const meme = {
+        selectedImgId,
+        selectedLineIdx,
+        lines
+    }
+    gMeme = meme
+    _saveMemeToStorage()
     return meme
+}
+
+function getImgById(imgId) {
+    console.log(imgId);
+    const img = gImgs.find(img => imgId === img.id)
+    console.log(img)
+    return img
 }
 
 function setLineTxt(txt) {
@@ -54,14 +76,15 @@ function createLine(txt, size = 15, align = 'left', color = '#ffffff') {
 }
 
 // function createMeme(){
-//     gMeme = _loadMemeToStorage()
+//     gMeme = _loadMemeFromStorage()
 //     if(!gMeme) 
 // }
 
 function _saveMemeToStorage() {
+    console.log('here')
     saveToStorage(MEME_KEY, gMeme)
 }
 
-function _loadMemeToStorage() {
+function _loadMemeFromStorage() {
     return loadFromStorage(MEME_KEY)
 }
