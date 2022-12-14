@@ -94,3 +94,7 @@ function onNewLine() {
     document.querySelector('input[name="text"]').value = ''
     newLine()
 }
+
+function choosenLine(){
+    
+}

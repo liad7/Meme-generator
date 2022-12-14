@@ -9,7 +9,7 @@ function renderGallery() {
                 </div>`
     })
     console.log(strHTMLs)
-    const elImgs = document.querySelector('.gallery-container')
+    const elImgs = document.querySelector('.imgs-container')
     elImgs.innerHTML = strHTMLs.join('')
 }
 
