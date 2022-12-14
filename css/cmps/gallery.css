@@ -1,9 +1,9 @@
 .imgs-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    grid-auto-rows: minmax(100px, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-auto-rows: minmax(200px, 1fr);
     /* grid-auto-rows: 100px; */
-    gap: 10px;
+    gap: 15px;
     grid-auto-flow: dense;
     text-align: center;
     padding: 60px;
@@ -12,8 +12,18 @@
 }
 
 .imgs-container .img-container {
-    font-family: sans-serif;
-    /* padding-inline: 1em; */
-    border: 1px solid black;
+    /* font-family: sans-serif; */
+    /* border: 1px solid black; */
     background-size: cover;
+}
+
+.imgs-container img {
+    border-radius: 2em;
+    cursor: pointer;
+
+}
+
+.imgs-container img:hover{
+    /* -webkit-filter: brightness(1.2); */
+    filter: brightness(0.7);
 }

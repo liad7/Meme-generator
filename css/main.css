@@ -11,7 +11,7 @@
 @import './basic/layout.css';
 
 /* Cmps */
-/* @import './cmps/header.css'; */
+@import './cmps/header.css';
 /* @import './cmps/main-content.css'; */
 @import './cmps/editor.css';
 @import './cmps/gallery.css';

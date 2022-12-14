@@ -8,10 +8,12 @@
     <title>Meme Generator</title>
 </head>
 <body onload="onInit()" class="main-layout">
-    <header class="">
-        <div class="logo"></div>
+    <header class="flex align-center space-between">
+        <div class="logo">
+            <img src="/LOGO/LOGO.png">
+        </div>
         <nav class="main-nav">
-            <ul>
+            <ul class="flex clean-list">
                 <li><a href="#">Gallery</a></li>
                 <li><a href="#">Memes</a></li>
                 <li><a href="#">About</a></li>
@@ -20,10 +22,10 @@
         <button class="menu-toggle-btn" style="display: none;">☰</button>
     </header>
 
-    
-
     <main class="gallery-container">
-        <div class="search-bar"></div>
+        <div class="search-bar">
+            <input type="text" onchange="onSearch(event,value)" placeholder="Search">
+        </div>
         <section class="imgs-container"></section>
     </main>
     <section class="editor">
@@ -35,6 +37,7 @@
             <button onclick="onSwitchLine()">↑↓</button>
             <button onclick="onSetSize(5)">+A</button>
             <button onclick="onSetSize(-5)">-A</button>
+            <button onclick="onDeleteLine()">delete</button>
         </div>
     </section>
     <footer></footer>

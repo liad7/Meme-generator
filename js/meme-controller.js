@@ -3,10 +3,6 @@
 var gElCanvas
 var gCtx
 
-var gX = 10
-var gY = 10
-
-
 function onInit() {
     initService()
     gElCanvas = document.querySelector('canvas')
@@ -15,8 +11,8 @@ function onInit() {
     renderMeme()
 }
 function renderMeme() {
-    const img = new Image()
     const meme = getMeme()
+    const img = new Image()
     img.src = getImgUrl()
     img.onload = () => {
         renderImg(img)
@@ -93,6 +89,11 @@ function getPos(lineId) {
 function onNewLine() {
     document.querySelector('input[name="text"]').value = ''
     newLine()
+}
+
+function onDeleteLine(){
+    deleteLine()
+    renderMeme()
 }
 
 function choosenLine(){

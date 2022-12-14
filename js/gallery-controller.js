@@ -8,12 +8,14 @@ function renderGallery() {
                     <img src="${url}">
                 </div>`
     })
-    console.log(strHTMLs)
+    // console.log(strHTMLs)
     const elImgs = document.querySelector('.imgs-container')
     elImgs.innerHTML = strHTMLs.join('')
 }
 
 function onImgSelect(imgId) {
+    document.querySelector('.gallery-container').style.display = 'none'
+    document.querySelector('.editor').style.display = 'block'
     setImg(imgId)
     renderMeme()
 }
