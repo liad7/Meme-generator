@@ -1,4 +1,5 @@
 :root {
+    /* COLORS  */
     /* bg color header and btns */
     --clr0: linear-gradient(to right, #4f89c0, #37a870);
     /* color hover on a in header  */
@@ -9,5 +10,15 @@
     --clr2: #383b42;
     /* text color  */
     --clr3: #fefefe;
+    /* bg color input editor   */
+    --clr5: #ebeef3;
+    /*color input editor   */
+    --clr6: #3d3d3d;
+    /* shadow color btn editor  */
+    --clr7: #5c5c5c5c;
+    /* bg color edit btns container  */
+    --clr8: #19a59f;
 
+    /* SIZES  */
+    --btn-s: 50px;
 }

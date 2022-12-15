@@ -3,6 +3,8 @@ header{
     padding: 0 1em;
     background-image: var(--clr0);
     margin-bottom: 2em;
+    height: 10vh;
+    /* max-height: ; */
 }
 
 header .logo img {
@@ -17,7 +19,7 @@ header .logo img {
     text-align: center;
     place-content: center;
     /* min-width: max-content; */
-    height: 5em;
+    /* height: 5em; */
 
 }
 

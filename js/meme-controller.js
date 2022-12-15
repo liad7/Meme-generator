@@ -96,6 +96,6 @@ function onDeleteLine(){
     renderMeme()
 }
 
-function choosenLine(){
-    
+function onSetFont(fontStyle){
+    console.log(fontStyle);
 }

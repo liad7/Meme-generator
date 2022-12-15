@@ -34,14 +34,24 @@
         <div class="controllers">
             <input type="text" name="text" oninput="onSetLineTxt(event,value)" placeholder="Add text...">
             <section class="line-actions">
-                <button onclick="onNewLine()">+</button>
-                <button onclick="onSwitchLine()">↑↓</button>
-                <button onclick="onDeleteLine()">delete</button>
+                <button class="fa switch edit-btn" onclick="onSwitchLine()"></button>
+                <button class="fa add edit-btn" onclick="onNewLine()"></button>
+                <button class="fa trash edit-btn" onclick="onDeleteLine()"></button>
             </section>
             <section class="font-actions">
-                <input type="color" onchange="onSetColor(value)">
-                <button onclick="onSetSize(5)">+A</button>
-                <button onclick="onSetSize(-5)">-A</button>
+                <button class="fa left edit-btn"></button>
+                <button class="fa txt-center edit-btn"></button>
+                <button class="fa right edit-btn"></button>
+                <button class="increase edit-btn" onclick="onSetSize(5)"></button>
+                <button class="decrease edit-btn" onclick="onSetSize(-5)"></button>
+                <select onchange="onSetFont(this.value)" class="font-select">
+                    <option value="impact">IMPACT</option>
+                    <option value="ariel">ARIEL</option>
+                    <option value="david">DAVID</option>
+                    <option value="sans-serif">SANS-SARIF</option>
+                </select>
+                <input class="storke-color edit-btn" type="color" onchange="onSetStrokeColor(value)">
+                <input class="txt-color edit-btn" type="color" onchange="onSetColor(value)">
             </section>
         </div>
     </section>

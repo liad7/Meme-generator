@@ -1,11 +1,11 @@
 .editor {
     display: none;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 5em;
     padding: 0 3em;
 }
 
-canvas{
+canvas {
     grid-column: 1;
     border-radius: 2em;
     border: 6px solid var(--clr2);
@@ -17,24 +17,128 @@ canvas{
     border-radius: 2em;
 
     display: grid;
-    grid-template-rows: repeat(2,1fr) 2fr 1.5fr 1fr;
+    grid-template-rows: repeat(2, 1fr) 2fr 1.5fr 1fr;
+    /* grid-auto-rows: auto; */
     gap: 10px;
 
-    padding: 1em auto;
-    /* height: auto; */
+    padding: 1em;
+    height: fit-content;
+
 
 }
 
 
 
-.controllers .input[name="text"]{
+.controllers input[name="text"] {
     grid-row: 1;
+    font-family: poppins-medium;
+    font-size: 1.5em;
+    text-align: center;
+    /* color: var(--clr6); */
+    background-color: var(--clr5);
+    border-radius: inherit;
+    border: outset 3px #bbc4d1;
 }
 
 .controllers .line-actions {
     grid-row: 2;
+    text-align: center;
 }
 
 .controllers .font-actions {
     grid-row: 3;
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    grid-template-rows: repeat(2,1fr);
+    gap: 10px;
+    
+    /* place-content: center; */
 }
+
+.font-select{
+    grid-row: 2;
+    grid-column: 1/span 3;
+    border-radius: 0.5em;
+    border: none;
+    background-color: #ffffff;
+    box-shadow: 0px 5px 0 var(--clr7);
+}
+
+.controllers .edit-btn {
+    height: var(--btn-s);
+    width: var(--btn-s);
+    border-radius: 0.5em;
+    border: none;
+    background-color: #ffffff;
+    box-shadow: 0px 5px 0 var(--clr7);
+}
+
+.fa::before {
+    font-family: fa;
+    font-size: 2em;
+    text-shadow: 0px 3px 0 var(--clr7);
+}
+/* edit-btn  */
+
+button.edit-btn.add {
+    background-color: rgb(43, 218, 84);
+    box-shadow: 0px 4px 0 rgb(22 115 44);
+}
+
+.fa.add::before {
+    color: var(--clr3);
+    content: "\2b";
+}
+
+button.edit-btn.trash {
+    background-color: rgb(224, 60, 60);
+    box-shadow: 0px 4px 0 rgb(120 32 32);
+
+}
+
+.fa.trash::before {
+    color: var(--clr3);
+    content: "\f1f8";
+}
+
+button.edit-btn.switch {
+    background-color: rgb(34, 174, 229);
+    box-shadow: 0px 4px 0 rgb(20 104 138);
+
+}
+
+.fa.switch::before {
+    color: var(--clr3);
+    content: "\f883";
+}
+
+
+
+.fa.left::before {
+    content: "\f036";
+}
+
+.fa.txt-center::before {
+    content: "\f037";
+}
+
+.fa.right::before {
+    content: "\f038";
+}
+
+.font-actions {
+    background-color: var(--clr8);
+    border-radius: 1em;
+    padding: 1em;
+}
+
+.increase {
+    background-image: url('/ICONS/increase-font.png');
+    background-size: cover;
+}
+
+.decrease {
+    background-image: url('/ICONS/decrease-font.png');
+    background-size: cover;
+}
+``
