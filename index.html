@@ -39,9 +39,9 @@
                 <button class="fa trash edit-btn" onclick="onDeleteLine()"></button>
             </section>
             <section class="font-actions">
-                <button class="fa left edit-btn"></button>
-                <button class="fa txt-center edit-btn"></button>
-                <button class="fa right edit-btn"></button>
+                <button onclick="onSetAlign(value)" value="left" class="fa left edit-btn"></button>
+                <button onclick="onSetAlign(value)" value="center" class="fa txt-center edit-btn"></button>
+                <button onclick="onSetAlign(value)" value="right" class="fa right edit-btn"></button>
                 <button class="increase edit-btn" onclick="onSetSize(5)"></button>
                 <button class="decrease edit-btn" onclick="onSetSize(-5)"></button>
                 <select onchange="onSetFont(this.value)" class="font-select">

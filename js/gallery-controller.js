@@ -23,4 +23,15 @@ function onImgSelect(imgId) {
 function onOpanGallery(){
     document.querySelector('.editor').style.display = 'none' 
     document.querySelector('.gallery-container').style.display = 'block'
+    clearEditor()
+
 }
+
+function clearEditor(){
+    document.querySelector('input[name="text"]').value = ''
+    const elColors = Array.from(document.querySelectorAll('input[type="color"]'))
+    console.log(elColors);
+    elColors.forEach(elColor => elColor.value = '#000000')
+}
+
+``

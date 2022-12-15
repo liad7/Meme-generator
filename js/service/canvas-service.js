@@ -1,16 +1,14 @@
 'use strict'
 
-var gSettings = { size: 20, align: 'left', color: '#ffffff' }
+var gSettings = { size: 50, align: 'center', color: '#ffffff', font:'impact',stroke: 'black' }
 
 
-function createLine(txt) {
+function createLine() {
     const { lines, selectedLineIdx } = getMeme()
-    // console.log(selectedLineIdx)
-    const { size, align, color } = gSettings
-    const line = { txt, size, align, color, id:makeId()}
+    const { size, align, color,font,stroke } = gSettings
+    const line = {size, align, color, font, stroke, id:makeId()}
     lines[selectedLineIdx] = line
     return line
 }
 
-// function 
 

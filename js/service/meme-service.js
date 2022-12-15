@@ -15,7 +15,7 @@ function createMeme() {
     if (!meme) {
         meme = {
             selectedImgId: null,
-            selectedLineIdx: 0,
+            selectedLineIdx: null,
             lines: []
         }
         console.log(gMeme)
@@ -41,7 +41,7 @@ function setImg(imgId) {
     return setMeme(imgId, 0)
 }
 
-function setMeme(selectedImgId = '1', selectedLineIdx = 0, lines = []) {
+function setMeme(selectedImgId, selectedLineIdx = null, lines = []) {
     const meme = {
         selectedImgId,
         selectedLineIdx,
@@ -58,10 +58,18 @@ function getImgById(imgId) {
     return img
 }
 
+// function setLineTxt(txt) {
+//     const line = createLine(txt)
+//     _saveMemeToStorage()
+//     return line
+// }
+
 function setLineTxt(txt) {
-    const line = createLine(txt)
+    const { lines, selectedLineIdx } = gMeme
+    if(!lines[selectedLineIdx]) lines[selectedLineIdx] = createLine()
+    lines[selectedLineIdx].txt = txt
     _saveMemeToStorage()
-    return line
+    return lines[selectedLineIdx]
 }
 
 function switchLine() {
@@ -77,6 +85,7 @@ function newLine() {
     if (!gMeme.lines[gMeme.selectedLineIdx]) return
     gMeme.selectedLineIdx++
     console.log(gMeme.selectedLineIdx)
+    _saveMemeToStorage()
 }
 
 function deleteLine(){
@@ -98,6 +107,18 @@ function setColor(color) {
 function setAlign(align) {
     const { lines, selectedLineIdx } = gMeme
     lines[selectedLineIdx].align = align
+    _saveMemeToStorage()
+}
+
+function setFont(font) {
+    const { lines, selectedLineIdx } = gMeme
+    lines[selectedLineIdx].font = font
+    _saveMemeToStorage()
+}
+
+function setStrokeColor(stroke) {
+    const { lines, selectedLineIdx } = gMeme
+    lines[selectedLineIdx].stroke = stroke
     _saveMemeToStorage()
 }
 
