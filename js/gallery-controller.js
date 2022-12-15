@@ -15,7 +15,12 @@ function renderGallery() {
 
 function onImgSelect(imgId) {
     document.querySelector('.gallery-container').style.display = 'none'
-    document.querySelector('.editor').style.display = 'block'
+    document.querySelector('.editor').style.display = 'grid'
     setImg(imgId)
     renderMeme()
+}
+
+function onOpanGallery(){
+    document.querySelector('.editor').style.display = 'none' 
+    document.querySelector('.gallery-container').style.display = 'block'
 }

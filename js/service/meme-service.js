@@ -81,7 +81,8 @@ function newLine() {
 
 function deleteLine(){
     const { lines, selectedLineIdx } = gMeme
-    return lines.splice(selectedLineIdx,1)
+    lines.splice(selectedLineIdx,1)
+    _saveMemeToStorage()
 }
 
 function getLineIdxById(lineId) {

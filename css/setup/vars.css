@@ -1,0 +1,13 @@
+:root {
+    /* bg color header and btns */
+    --clr0: linear-gradient(to right, #4f89c0, #37a870);
+    /* color hover on a in header  */
+    --clr4: #21ac91;
+    /* bg color body  */
+    --clr1: #22252c;
+    /* bg color gallery  */
+    --clr2: #383b42;
+    /* text color  */
+    --clr3: #fefefe;
+
+}

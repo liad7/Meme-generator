@@ -1,3 +1,38 @@
-header .logo img{
-    height: 5vh;
+header{
+    border-radius: 5em;
+    padding: 0 1em;
+    background-image: var(--clr0);
+    margin-bottom: 2em;
+}
+
+header .logo img {
+    height: 2em;
+}
+
+.main-nav {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* grid-auto-rows: 1fr; */
+    gap: 15px;
+    text-align: center;
+    place-content: center;
+    /* min-width: max-content; */
+    height: 5em;
+
+}
+
+.main-nav a {
+    font-family: poppins;
+    align-self: center;
+    justify-self: center;
+    /* height: 100px; */
+    width: 100px;
+    color: var(--clr3);
+    font-size: 1.5em;
+    border-radius: 2em;
+}
+
+.main-nav a:hover {
+    color: var(--clr4);
+    background-color: var(--clr3);
 }

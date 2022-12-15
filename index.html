@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,17 +8,16 @@
     <link rel="stylesheet" href="css/main.css">
     <title>Meme Generator</title>
 </head>
+
 <body onload="onInit()" class="main-layout">
     <header class="flex align-center space-between">
         <div class="logo">
             <img src="/LOGO/LOGO.png">
         </div>
         <nav class="main-nav">
-            <ul class="flex clean-list">
-                <li><a href="#">Gallery</a></li>
-                <li><a href="#">Memes</a></li>
-                <li><a href="#">About</a></li>
-            </ul>
+            <a href="#" onclick="onOpanGallery()">Gallery</a>
+            <a href="#">Memes</a>
+            <a href="#">About</a>
         </nav>
         <button class="menu-toggle-btn" style="display: none;">☰</button>
     </header>
@@ -25,19 +25,24 @@
     <main class="gallery-container">
         <div class="search-bar">
             <input type="text" onchange="onSearch(event,value)" placeholder="Search">
+            <button>More</button>
         </div>
-        <section class="imgs-container"></section>
+        <section class="imgs-container scroll"></section>
     </main>
     <section class="editor">
         <canvas height="450" width="450"></canvas>
         <div class="controllers">
             <input type="text" name="text" oninput="onSetLineTxt(event,value)" placeholder="Add text...">
-            <input type="color" onchange="onSetColor(value)">
-            <button onclick="onNewLine()">+</button>
-            <button onclick="onSwitchLine()">↑↓</button>
-            <button onclick="onSetSize(5)">+A</button>
-            <button onclick="onSetSize(-5)">-A</button>
-            <button onclick="onDeleteLine()">delete</button>
+            <section class="line-actions">
+                <button onclick="onNewLine()">+</button>
+                <button onclick="onSwitchLine()">↑↓</button>
+                <button onclick="onDeleteLine()">delete</button>
+            </section>
+            <section class="font-actions">
+                <input type="color" onchange="onSetColor(value)">
+                <button onclick="onSetSize(5)">+A</button>
+                <button onclick="onSetSize(-5)">-A</button>
+            </section>
         </div>
     </section>
     <footer></footer>
@@ -50,4 +55,5 @@
     <script src="js/gallery-controller.js"></script>
     <script src="js/meme-controller.js"></script>
 </body>
+
 </html>

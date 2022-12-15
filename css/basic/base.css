@@ -4,7 +4,16 @@
 
 body {
     margin: 0;
+    padding: 1em;
+    font-family: poppins-light;
+    background-color: var(--clr1);
+    /* overflow: hidden; */
+
 }
+
+/* body::-webkit-scrollbar {
+    display: none;
+  } */
 
 
 img {
@@ -28,4 +37,8 @@ button {
     font-family: inherit;
     cursor: pointer;
     font-size: 1em;
+}
+
+a{
+    text-decoration: none;
 }
