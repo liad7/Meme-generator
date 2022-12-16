@@ -10,6 +10,7 @@ function renderGallery() {
     })
     const elImgs = document.querySelector('.imgs-container')
     elImgs.innerHTML = strHTMLs.join('')
+    renderDataList()
 }
 
 function onImgSelect(imgId,idx) {
@@ -40,6 +41,13 @@ function clearEditor() {
     const elColors = Array.from(document.querySelectorAll('input[type="color"]'))
     console.log(elColors)
     elColors.forEach(elColor => elColor.value = '#000000')
+}
+
+function renderDataList(){
+    const keywords = getKeywords()
+    var strHTMLs = keywords.map(keyword =>`<option value="${keyword}">`)
+    const elDatalist = document.querySelector('datalist')
+    elDatalist.innerHTML = strHTMLs.join('')
 }
 
 

@@ -27,4 +27,3 @@ function onClearMyMeme(){
     clearMyMeme()
     renderMyMeme()
 }
-``

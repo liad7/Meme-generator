@@ -14,6 +14,7 @@ function initService() {
     createImages()
     createMeme()
     createMyMemes()
+    getKeywords()
 }
 
 function createMyMemes() {
@@ -204,6 +205,18 @@ function _loadImgsFromStorage() {
     return loadFromStorage(IMG_KEY)
 }
 
+function getKeywords(){
+    const allKeywords = gImgs.reduce((acc,img) => {
+        img.keywords.reduce((acc,keyword) => {
+            if(!acc.includes(keyword)) acc.push(keyword)
+            return acc
+        },acc)
+        return acc
+    },[])
+    console.log(allKeywords);
+    return allKeywords
+}
+
 
 function createImages() {
     var imgs = _loadImgsFromStorage()
@@ -233,6 +246,6 @@ function createImages() {
     _saveImgsToStorage()
 }
 
-function _createImage(url, keywords) {
+function _createImage(url, keywords=[]) {
     return { id: makeId(), url, keywords }
 }

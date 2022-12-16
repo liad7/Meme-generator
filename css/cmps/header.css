@@ -8,6 +8,8 @@ header {
 
 header .logo img {
     height: 2em;
+    border-radius: 0px;
+    cursor: default;
 }
 
 .main-nav {
@@ -89,3 +91,5 @@ header .logo img {
         transform: translateX(0);
     }
 }
+
+`

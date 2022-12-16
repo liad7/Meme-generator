@@ -13,7 +13,7 @@
     font-size: 1.5em;
     border: none;
     border-radius: 2em;
-    /* color: var(--clr3); */
+    color: var(--clr3);
     background-color: var(--clr1);
     font-family: poppins;
 }
