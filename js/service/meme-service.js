@@ -2,13 +2,25 @@
 
 
 const MEME_KEY = 'memeDB'
+const MY_MEME_KEY = 'myMemesDB'
+const IMG_KEY = 'imgDB'
 
-var gImgs = _createImages()
+var gImgs 
 var gMeme
+var gMyMemes
 var gRandLines = ['love it', 'maybe', 'that what I like', 'that what she said', 'cheers']
 
 function initService() {
+    createImages()
     createMeme()
+    createMyMemes()
+}
+
+function createMyMemes() {
+    var myMemes = _loadMyMemesFromStorage()
+    if (!myMemes) myMemes = []
+    gMyMemes = myMemes
+    _saveMyMemesToStorage()
 }
 
 function createMeme() {
@@ -34,15 +46,23 @@ function getMeme() {
     return gMeme
 }
 
+function getMyMemes() {
+    return gMyMemes
+}
+
 function getImgs() {
     return gImgs
 }
 
-function setImg(imgId) {
-    return setMeme(imgId, 0)
+function setImg(imgId, idx) {
+    if (idx !== undefined) {
+        const lines = gMyMemes[idx].lines
+        return setMeme(imgId, lines)
+    }
+    return setMeme(imgId)
 }
 
-function setMeme(selectedImgId, selectedLineIdx = null, lines = []) {
+function setMeme(selectedImgId, lines = [], selectedLineIdx = 0) {
     const meme = {
         selectedImgId,
         selectedLineIdx,
@@ -134,17 +154,24 @@ function setSize(diff) {
 function randomMeme() {
     var idx = getRandomInt(0, gImgs.length)
     const img = gImgs[idx]
-    const count = getRandomInt(0,2)
+    const count = getRandomInt(0, 2)
     const randLines = []
-    for(var i=0;i<2;i++){
+    for (var i = 0; i < 2; i++) {
         const line = createRandomLine()
         idx = getRandomInt(0, gRandLines.length)
         line.txt = gRandLines[idx]
         randLines.push(line)
     }
-    return setMeme(img.id,1,randLines)
+    return setMeme(img.id, 1, randLines)
 }
 
+function saveMeme() {
+    gMyMemes.push(gMeme)
+    _saveMyMemesToStorage()
+}
+
+
+// meme 
 function _saveMemeToStorage() {
     saveToStorage(MEME_KEY, gMeme)
 }
@@ -153,27 +180,57 @@ function _loadMemeFromStorage() {
     return loadFromStorage(MEME_KEY)
 }
 
-function _createImages() {
-    return [
-        _createImage('/meme-imgs/1.jpg', ['trump', 'celeb']),
-        _createImage('/meme-imgs/2.jpg', ['dog', 'cute', 'animal']),
-        _createImage('/meme-imgs/3.jpg', ['dog', 'cute', 'animal', 'tierd', 'baby']),
-        _createImage('/meme-imgs/4.jpg', ['cute', 'animal', 'tierd', 'cat']),
-        _createImage('/meme-imgs/5.jpg', ['sucsses', 'baby', 'cute']),
-        _createImage('/meme-imgs/6.jpg', ['aliens', 'history', 'guy']),
-        _createImage('/meme-imgs/7.jpg', ['funny', 'cute', 'baby', 'supriesed']),
-        _createImage('/meme-imgs/8.jpg', ['willi', 'tell']),
-        _createImage('/meme-imgs/9.jpg', ['evil', 'cute', 'baby', 'laugh']),
-        _createImage('/meme-imgs/10.jpg', ['obama', 'laugh', 'smile', 'celeb']),
-        _createImage('/meme-imgs/11.jpg', ['kiss', 'guy', 'basketball']),
-        _createImage('/meme-imgs/12.jpg', ['finger', 'point']),
-        _createImage('/meme-imgs/13.jpg', ['decaprio', 'cheers', 'smile']),
-        _createImage('/meme-imgs/14.jpg', ['matrix', 'sunglasses']),
-        _createImage('/meme-imgs/15.jpg', ['mordor', 'guy', 'rings', 'lord']),
-        _createImage('/meme-imgs/16.jpg', ['guy', 'star', 'smile']),
-        _createImage('/meme-imgs/17.jpg', ['putin', 'suit', 'two']),
-        _createImage('/meme-imgs/18.jpg', ['toy', 'buzz', 'woddy']),
-    ]
+
+// my memes 
+function _saveMyMemesToStorage() {
+    saveToStorage(MY_MEME_KEY, gMyMemes)
+}
+
+function _loadMyMemesFromStorage() {
+    return loadFromStorage(MY_MEME_KEY)
+}
+
+function clearMyMeme(){
+    gMyMemes = []
+    _saveMyMemesToStorage()
+}
+
+// imgs 
+function _saveImgsToStorage() {
+    saveToStorage(IMG_KEY, gImgs)
+}
+
+function _loadImgsFromStorage() {
+    return loadFromStorage(IMG_KEY)
+}
+
+
+function createImages() {
+    var imgs = _loadImgsFromStorage()
+    if (!imgs) {
+        imgs = [
+            _createImage('/meme-imgs/1.jpg', ['trump', 'celeb']),
+            _createImage('/meme-imgs/2.jpg', ['dog', 'cute', 'animal']),
+            _createImage('/meme-imgs/3.jpg', ['dog', 'cute', 'animal', 'tierd', 'baby']),
+            _createImage('/meme-imgs/4.jpg', ['cute', 'animal', 'tierd', 'cat']),
+            _createImage('/meme-imgs/5.jpg', ['sucsses', 'baby', 'cute']),
+            _createImage('/meme-imgs/6.jpg', ['aliens', 'history', 'guy']),
+            _createImage('/meme-imgs/7.jpg', ['funny', 'cute', 'baby', 'supriesed']),
+            _createImage('/meme-imgs/8.jpg', ['willi', 'tell']),
+            _createImage('/meme-imgs/9.jpg', ['evil', 'cute', 'baby', 'laugh']),
+            _createImage('/meme-imgs/10.jpg', ['obama', 'laugh', 'smile', 'celeb']),
+            _createImage('/meme-imgs/11.jpg', ['kiss', 'guy', 'basketball']),
+            _createImage('/meme-imgs/12.jpg', ['finger', 'point']),
+            _createImage('/meme-imgs/13.jpg', ['decaprio', 'cheers', 'smile']),
+            _createImage('/meme-imgs/14.jpg', ['matrix', 'sunglasses']),
+            _createImage('/meme-imgs/15.jpg', ['mordor', 'guy', 'rings', 'lord']),
+            _createImage('/meme-imgs/16.jpg', ['guy', 'star', 'smile']),
+            _createImage('/meme-imgs/17.jpg', ['putin', 'suit', 'two']),
+            _createImage('/meme-imgs/18.jpg', ['toy', 'buzz', 'woddy']),
+        ]
+    }
+    gImgs = imgs
+    _saveImgsToStorage()
 }
 
 function _createImage(url, keywords) {

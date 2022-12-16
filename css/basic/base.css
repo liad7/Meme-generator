@@ -18,6 +18,11 @@ body {
 
 img {
     width: 100%;
+    border-radius: 2em;
+    cursor: pointer;
+}
+img:hover {
+    filter: brightness(0.7);
 }
 
 h1,

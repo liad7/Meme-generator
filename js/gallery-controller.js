@@ -12,30 +12,33 @@ function renderGallery() {
     elImgs.innerHTML = strHTMLs.join('')
 }
 
-function onImgSelect(imgId) {
+function onImgSelect(imgId,idx) {
     openEditor()
-    setImg(imgId)
+    setImg(imgId,idx)
+    // setMeme(imgId,idx)
     resizeCanvas()
     clearEditor()
     // renderMeme()
 }
 
-function openEditor(){
+function openEditor() {
     document.querySelector('.gallery-container').style.display = 'none'
+    document.querySelector('.my-meme-container').style.display = 'none'
     document.querySelector('.editor').style.display = 'grid'
 }
 
-function onOpanGallery(){
-    document.querySelector('.editor').style.display = 'none' 
+function onOpenGallery() {
+    document.querySelector('.my-meme-container').style.display = 'none'
+    document.querySelector('.editor').style.display = 'none'
     document.querySelector('.gallery-container').style.display = 'block'
-    onToggleMenu()
+    closeMenu()
 
 }
 
-function clearEditor(){
+function clearEditor() {
     document.querySelector('input[name="text"]').value = ''
     const elColors = Array.from(document.querySelectorAll('input[type="color"]'))
-    console.log(elColors);
+    console.log(elColors)
     elColors.forEach(elColor => elColor.value = '#000000')
 }
 

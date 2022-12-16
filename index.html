@@ -16,8 +16,8 @@
         </div>
         <nav class="main-nav">
             <button class="close-menu-btn" onclick="onToggleMenu()">✖️</button>
-            <a href="#" onclick="onOpanGallery()">Gallery</a>
-            <a href="#">Memes</a>
+            <a href="#" onclick="onOpenGallery()">Gallery</a>
+            <a href="#" onclick="onOpenMyMeme()">Memes</a>
             <a href="#">About</a>
         </nav>
         <button class="open-menu-btn" onclick="onToggleMenu()">☰</button>
@@ -32,6 +32,10 @@
         </div>
         <section class="imgs-container scroll"></section>
     </main>
+    <section class="my-meme-container">
+        <button onclick="onClearMyMeme()">Clear History</button>
+        <section class="img-meme-container"></section>
+    </section>
     <section class="editor">
         <canvas height="450" width="450"></canvas>
         <div class="controllers">
@@ -55,6 +59,7 @@
                 </select>
                 <input class="storke-color edit-btn" type="color" onchange="onSetStrokeColor(value)">
                 <input class="txt-color edit-btn" type="color" onchange="onSetColor(value)">
+                <button onclick="onSaveMeme()">Save</button>
             </section>
         </div>
     </section>
@@ -66,6 +71,7 @@
     <script src="js/service/canvas-service.js"></script>
     <script src="js/service/meme-service.js"></script>
     <script src="js/gallery-controller.js"></script>
+    <script src="js/my-meme-controller.js"></script>
     <script src="js/meme-controller.js"></script>
 </body>
 

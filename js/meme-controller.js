@@ -16,6 +16,11 @@ function onInit() {
 function onToggleMenu(){
     document.body.classList.toggle('menu-open')
 }
+
+function closeMenu(){
+    document.body.classList.remove('menu-open')
+}
+
 function renderMeme() {
     const meme = getMeme()
     const img = new Image()
@@ -134,5 +139,9 @@ function onRandomMeme(){
     randomMeme()
     openEditor()
     renderMeme()
+}
+
+function onSaveMeme(){
+    saveMeme()
 }
 
