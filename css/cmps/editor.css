@@ -1,8 +1,8 @@
 .editor {
     display: none;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 2fr;
-    /* grid-template-rows: repeat(2, 1fr); */
+    /* grid-template-columns: 1fr; */
+    /* grid-template-rows: 1fr 2fr; */
+    grid-template-rows: repeat(2, 1fr);
     gap: 1em;
     padding: 0;
 }
@@ -22,12 +22,14 @@ canvas {
     /* grid-column: 2; */
     background-color: var(--clr2);
     border-radius: 2em;
-
+    
     display: grid;
-    grid-template-rows: repeat(2, 1fr) 2fr 1.5fr 1fr;
+    /* grid-template-rows: repeat(2, 1fr) 2fr 1.5fr 1fr; */
+    grid-template-rows: repeat(2, 1fr) 3fr;
+    /* change it when add more to controller  */
     /* grid-auto-rows: auto; */
     gap: 10px;
-
+    
     padding: 1em;
     height: fit-content;
 }
@@ -39,7 +41,7 @@ canvas {
     font-family: poppins-medium;
     font-size: 1.5em;
     text-align: center;
-
+    
     background-color: var(--clr5);
     border-radius: inherit;
     border: outset 3px #bbc4d1;
@@ -56,12 +58,13 @@ canvas {
 .controllers .font-actions {
     grid-row: 3;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
     gap: 10px;
-
+    
     /* place-content: center; */
 }
+
 
 .font-select {
     grid-row: 2;
@@ -102,7 +105,7 @@ button.edit-btn.add {
 button.edit-btn.trash {
     background-color: rgb(224, 60, 60);
     box-shadow: 0px 4px 0 rgb(120 32 32);
-
+    
 }
 
 .fa.trash::before {
@@ -113,15 +116,13 @@ button.edit-btn.trash {
 button.edit-btn.switch {
     background-color: rgb(34, 174, 229);
     box-shadow: 0px 4px 0 rgb(20 104 138);
-
+    
 }
 
 .fa.switch::before {
     color: var(--clr3);
     content: "\f883";
 }
-
-
 
 .fa.left::before {
     content: "\f036";
@@ -151,21 +152,32 @@ button.edit-btn.switch {
     background-size: cover;
 }
 
-@media (min-width: 780px) {}
+@media (min-width: 700px) {
+    .controllers {
+    grid-template-rows: repeat(2, 1fr) 2fr;
+    }
+    .controllers .font-actions {
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        /* place-content: center; */
+    }
+}
 
-@media (min-width: 1060px) {
+@media (min-width: 1000px) {
     .editor {
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: 1fr;
         gap: 5em;
-
+        
         padding: 0 3em;
-
+        
     }
-
+    
     .controllers {
         align-self: center;
         justify-self: center;
-
+        
     }
 }
+
+`

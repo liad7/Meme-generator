@@ -4,6 +4,7 @@ header {
     background-image: var(--clr0);
     margin-bottom: 2em;
     height: 10vh;
+    min-width: 300px;
 }
 
 header .logo img {
@@ -60,7 +61,7 @@ header .logo img {
     /* color: white; */
 }
 
-@media (max-width: 700px) {
+@media (max-width: 570px) {
     .main-nav {
         position: fixed;
         z-index: 2;
@@ -68,7 +69,7 @@ header .logo img {
         right: 0;
         height: 50vh;
         grid-template-columns: 1fr;
-        gap: 100px;
+        gap: 5em;
         border-radius: 2em;
         background: var(--clr0);
         align-items: center;
@@ -76,6 +77,7 @@ header .logo img {
         min-width: 200px;
         transform: translateX(100%);
         transition: transform .6s, box-shadow .6s;
+        padding: 1em 0;
     }
 
     .open-menu-btn {
