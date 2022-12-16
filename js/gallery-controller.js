@@ -8,7 +8,6 @@ function renderGallery() {
                     <img src="${url}">
                 </div>`
     })
-    // console.log(strHTMLs)
     const elImgs = document.querySelector('.imgs-container')
     elImgs.innerHTML = strHTMLs.join('')
 }
@@ -18,13 +17,14 @@ function onImgSelect(imgId) {
     document.querySelector('.editor').style.display = 'grid'
     setImg(imgId)
     resizeCanvas()
+    clearEditor()
     // renderMeme()
 }
 
 function onOpanGallery(){
     document.querySelector('.editor').style.display = 'none' 
     document.querySelector('.gallery-container').style.display = 'block'
-    clearEditor()
+    onToggleMenu()
 
 }
 
@@ -34,4 +34,6 @@ function clearEditor(){
     console.log(elColors);
     elColors.forEach(elColor => elColor.value = '#000000')
 }
+
+
 

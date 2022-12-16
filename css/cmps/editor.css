@@ -1,20 +1,25 @@
 .editor {
     display: none;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 5em;
-    padding: 0 3em;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 2fr;
+    /* grid-template-rows: repeat(2, 1fr); */
+    gap: 1em;
+    padding: 0;
 }
 
 canvas {
-    grid-column: 1;
+    /* grid-column: 1; */
     border-radius: 2em;
     border: 6px solid var(--clr2);
     min-height: 300px;
     min-width: 300px;
+
+    align-self: center;
+    justify-self: center;
 }
 
 .controllers {
-    grid-column: 2;
+    /* grid-column: 2; */
     background-color: var(--clr2);
     border-radius: 2em;
 
@@ -25,8 +30,6 @@ canvas {
 
     padding: 1em;
     height: fit-content;
-
-
 }
 
 
@@ -36,10 +39,13 @@ canvas {
     font-family: poppins-medium;
     font-size: 1.5em;
     text-align: center;
-    /* color: var(--clr6); */
+
     background-color: var(--clr5);
     border-radius: inherit;
     border: outset 3px #bbc4d1;
+    max-width: 50%;
+    max-height: 3em;
+    justify-self: center;
 }
 
 .controllers .line-actions {
@@ -50,14 +56,14 @@ canvas {
 .controllers .font-actions {
     grid-row: 3;
     display: grid;
-    grid-template-columns: repeat(5,1fr);
-    grid-template-rows: repeat(2,1fr);
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     gap: 10px;
-    
+
     /* place-content: center; */
 }
 
-.font-select{
+.font-select {
     grid-row: 2;
     grid-column: 1/span 3;
     border-radius: 0.5em;
@@ -80,6 +86,7 @@ canvas {
     font-size: 2em;
     text-shadow: 0px 3px 0 var(--clr7);
 }
+
 /* edit-btn  */
 
 button.edit-btn.add {
@@ -142,4 +149,23 @@ button.edit-btn.switch {
 .decrease {
     background-image: url('/ICONS/decrease-font.png');
     background-size: cover;
+}
+
+@media (min-width: 780px) {}
+
+@media (min-width: 1060px) {
+    .editor {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 1fr;
+        gap: 5em;
+
+        padding: 0 3em;
+
+    }
+
+    .controllers {
+        align-self: center;
+        justify-self: center;
+
+    }
 }

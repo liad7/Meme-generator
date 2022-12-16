@@ -3,8 +3,6 @@
 }
 
 ::-webkit-scrollbar-track {
-    /* height: 70%; */
-    /* margin-inline-end: 2em; */
     background-color: var(--clr1);
     border-radius: 10px;
 }

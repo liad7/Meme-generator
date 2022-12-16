@@ -7,12 +7,10 @@ function onInit() {
     initService()
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
-    // resizeCanvas()
     renderGallery()
     window.addEventListener('resize', () => {
         resizeCanvas()
     })
-    // renderMeme()
 }
 
 function onToggleMenu(){
@@ -73,17 +71,9 @@ function onSwitchLine() {
     document.querySelector('input[name="text"]').value = switchLine()
 }
 
-// function getPos(lineId) {
-//     var pos = { x: 10, y: 10 }
-//     // console.log(getLineIdxById(lineId))
-//     if (getLineIdxById(lineId) === 1) pos.y = gElCanvas.height - 10
-//     return pos
-// }
-
 function getPos(lineId, align) {
     var diff = 40
     var pos = { x: diff, y: diff }
-    // var pos
     switch (align) {
         case 'right':
             pos.x = gElCanvas.width - diff

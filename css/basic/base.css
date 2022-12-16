@@ -7,7 +7,7 @@ body {
     padding: 1em;
     font-family: poppins-light;
     background-color: var(--clr1);
-    /* overflow: hidden; */
+    overflow: hidden;
 
 }
 

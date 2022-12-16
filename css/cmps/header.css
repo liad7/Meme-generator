@@ -4,7 +4,6 @@ header {
     background-image: var(--clr0);
     margin-bottom: 2em;
     height: 10vh;
-    /* max-height: ; */
 }
 
 header .logo img {
@@ -18,18 +17,8 @@ header .logo img {
     gap: 15px;
     text-align: center;
     place-content: center;
-    /* min-width: max-content; */
-    /* height: 5em; */
-
 }
 
-.main-nav .close-menu{
-    display: none;
-    position: fixed;
-    top: 1em;
-    right: 1em;
-
-}
 
 .main-nav a {
     font-family: poppins;
@@ -45,6 +34,28 @@ header .logo img {
 .main-nav a:hover {
     color: var(--clr4);
     background-color: var(--clr3);
+}
+
+.open-menu-btn {
+    display: none;
+    background-color: inherit;
+    border: none;
+    border-radius: 2em;
+    font-size: 1.5em;
+    background-color:var(--clr3) ;
+    color: var(--clr8);
+
+}
+
+.main-nav .close-menu-btn{
+    display: none;
+    position: fixed;
+    top: 0.5em;
+    right: 0.5em;
+    background-color: inherit;
+    border: none;
+    font-size: 2rem;
+    /* color: white; */
 }
 
 @media (max-width: 700px) {
@@ -65,7 +76,10 @@ header .logo img {
         transition: transform .6s, box-shadow .6s;
     }
 
-    .main-nav .close-menu{
+    .open-menu-btn {
+        display: block;
+    }
+    .main-nav .close-menu-btn{
         display: block;
     }
 
@@ -73,13 +87,5 @@ header .logo img {
         box-shadow: -6px 0px 14px rgb(0 0 0 / 20%);
         max-height: 100vh;
         transform: translateX(0);
-    }
-
-    .menu-toggle-btn {
-        background-color: inherit;
-        border: none;
-        font-size: 2rem;
-        color: white;
-        cursor: pointer;
     }
 }
