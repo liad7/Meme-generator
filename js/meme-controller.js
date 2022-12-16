@@ -7,8 +7,16 @@ function onInit() {
     initService()
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
+    // resizeCanvas()
     renderGallery()
+    window.addEventListener('resize', () => {
+        resizeCanvas()
+    })
     // renderMeme()
+}
+
+function onToggleMenu(){
+    document.body.classList.toggle('menu-open')
 }
 function renderMeme() {
     const meme = getMeme()
@@ -31,21 +39,19 @@ function renderTexts(lines) {
     })
 }
 
+function resizeCanvas() {  //not sure about this func
+    const elContainer = document.querySelector('.editor')
+    gElCanvas.height = gElCanvas.width = elContainer.offsetWidth / 2 - 50
+    // gElCanvas.height = gElCanvas.width = elContainer.offsetWidth / 2 - 20
+    renderMeme()
+}
+
 function onSetLineTxt(ev, txt) {
     ev.preventDefault()
     const line = setLineTxt(txt)
     renderMeme()
 
 }
-
-// function renderText(line) {
-//     const { txt, size, align, color, id } = line
-//     gCtx.font = `${size}px serif`
-//     const { x, y } = getPos(id)
-//     gCtx.fillText(txt, x, y)
-//     // gCtx.fillText(txt, 10, 50)
-//     gCtx.fillStyle = color
-// }
 
 function drawText(line) {
     const { txt, size, align, color, id, font, stroke } = line
@@ -60,9 +66,6 @@ function drawText(line) {
     gCtx.fillText(txt, x, y)
     gCtx.strokeText(txt, x, y)
 
-
-    // gCtx.fillText(text, x, y) // Draws (fills) a given text at the given (x, y) position.
-    // gCtx.strokeText(text, x, y) // Draws (strokes) a given text at the given (x, y) position.
 }
 
 

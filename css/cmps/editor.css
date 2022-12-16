@@ -9,6 +9,8 @@ canvas {
     grid-column: 1;
     border-radius: 2em;
     border: 6px solid var(--clr2);
+    min-height: 300px;
+    min-width: 300px;
 }
 
 .controllers {

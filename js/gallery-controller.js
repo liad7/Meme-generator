@@ -17,7 +17,8 @@ function onImgSelect(imgId) {
     document.querySelector('.gallery-container').style.display = 'none'
     document.querySelector('.editor').style.display = 'grid'
     setImg(imgId)
-    renderMeme()
+    resizeCanvas()
+    // renderMeme()
 }
 
 function onOpanGallery(){
@@ -34,4 +35,3 @@ function clearEditor(){
     elColors.forEach(elColor => elColor.value = '#000000')
 }
 
-``

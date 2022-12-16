@@ -1,4 +1,4 @@
-header{
+header {
     border-radius: 5em;
     padding: 0 1em;
     background-image: var(--clr0);
@@ -14,12 +14,20 @@ header .logo img {
 .main-nav {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    /* grid-auto-rows: 1fr; */
+
     gap: 15px;
     text-align: center;
     place-content: center;
     /* min-width: max-content; */
     /* height: 5em; */
+
+}
+
+.main-nav .close-menu{
+    display: none;
+    position: fixed;
+    top: 1em;
+    right: 1em;
 
 }
 
@@ -37,4 +45,41 @@ header .logo img {
 .main-nav a:hover {
     color: var(--clr4);
     background-color: var(--clr3);
+}
+
+@media (max-width: 700px) {
+    .main-nav {
+        position: fixed;
+        z-index: 2;
+        top: 1em;
+        right: 0;
+        height: 50vh;
+        grid-template-columns: 1fr;
+        gap: 100px;
+        border-radius: 2em;
+        background: var(--clr0);
+        align-items: center;
+        /*border-inline-start: 1px solid #ccc; */
+        min-width: 200px;
+        transform: translateX(100%);
+        transition: transform .6s, box-shadow .6s;
+    }
+
+    .main-nav .close-menu{
+        display: block;
+    }
+
+    body.menu-open .main-nav {
+        box-shadow: -6px 0px 14px rgb(0 0 0 / 20%);
+        max-height: 100vh;
+        transform: translateX(0);
+    }
+
+    .menu-toggle-btn {
+        background-color: inherit;
+        border: none;
+        font-size: 2rem;
+        color: white;
+        cursor: pointer;
+    }
 }
