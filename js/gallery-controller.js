@@ -13,12 +13,16 @@ function renderGallery() {
 }
 
 function onImgSelect(imgId) {
-    document.querySelector('.gallery-container').style.display = 'none'
-    document.querySelector('.editor').style.display = 'grid'
+    openEditor()
     setImg(imgId)
     resizeCanvas()
     clearEditor()
     // renderMeme()
+}
+
+function openEditor(){
+    document.querySelector('.gallery-container').style.display = 'none'
+    document.querySelector('.editor').style.display = 'grid'
 }
 
 function onOpanGallery(){

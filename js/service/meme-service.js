@@ -5,6 +5,7 @@ const MEME_KEY = 'memeDB'
 
 var gImgs = _createImages()
 var gMeme
+var gRandLines = ['love it', 'maybe', 'that what I like', 'that what she said', 'cheers']
 
 function initService() {
     createMeme()
@@ -66,7 +67,7 @@ function getImgById(imgId) {
 
 function setLineTxt(txt) {
     const { lines, selectedLineIdx } = gMeme
-    if(!lines[selectedLineIdx]) lines[selectedLineIdx] = createLine()
+    if (!lines[selectedLineIdx]) lines[selectedLineIdx] = createLine()
     lines[selectedLineIdx].txt = txt
     _saveMemeToStorage()
     return lines[selectedLineIdx]
@@ -88,9 +89,9 @@ function newLine() {
     _saveMemeToStorage()
 }
 
-function deleteLine(){
+function deleteLine() {
     const { lines, selectedLineIdx } = gMeme
-    lines.splice(selectedLineIdx,1)
+    lines.splice(selectedLineIdx, 1)
     _saveMemeToStorage()
 }
 
@@ -128,6 +129,20 @@ function setSize(diff) {
     if (line.size + diff > 100 || line.size + diff < 10) return
     line.size += diff
     _saveMemeToStorage()
+}
+
+function randomMeme() {
+    var idx = getRandomInt(0, gImgs.length)
+    const img = gImgs[idx]
+    const count = getRandomInt(0,2)
+    const randLines = []
+    for(var i=0;i<2;i++){
+        const line = createRandomLine()
+        idx = getRandomInt(0, gRandLines.length)
+        line.txt = gRandLines[idx]
+        randLines.push(line)
+    }
+    return setMeme(img.id,1,randLines)
 }
 
 function _saveMemeToStorage() {

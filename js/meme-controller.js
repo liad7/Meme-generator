@@ -130,3 +130,9 @@ function onDeleteLine() {
     renderMeme()
 }
 
+function onRandomMeme(){
+    randomMeme()
+    openEditor()
+    renderMeme()
+}
+
