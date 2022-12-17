@@ -28,7 +28,8 @@ header .logo img {
     align-self: center;
     justify-self: center;
     /* height: 100px; */
-    width: 100px;
+    /* width: 100px; */
+    width: fit-content;
     color: var(--clr3);
     font-size: 1.5em;
     border-radius: 2em;
@@ -53,15 +54,15 @@ header .logo img {
 .main-nav .close-menu-btn{
     display: none;
     position: fixed;
-    top: 0.5em;
-    right: 0.5em;
+    top: 0.3em;
+    right: 0.3em;
     background-color: inherit;
     border: none;
     font-size: 2rem;
     /* color: white; */
 }
 
-@media (max-width: 570px) {
+@media (max-width: 790px) {
     .main-nav {
         position: fixed;
         z-index: 2;
@@ -69,7 +70,7 @@ header .logo img {
         right: 0;
         height: 50vh;
         grid-template-columns: 1fr;
-        gap: 5em;
+        gap: 4em;
         border-radius: 2em;
         background: var(--clr0);
         align-items: center;

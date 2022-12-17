@@ -30,12 +30,30 @@ function renderMeme(isMark) {
     const meme = getMeme()
     const img = new Image()
     img.src = getImgUrl()
+    console.log(getImgs());
     img.onload = () => {
         renderImg(img)
         if (isMark) markSelctedLine(meme, gMarkclr)
         renderTexts(meme.lines)  ///why doesnt work with one
     }
     // renderTexts(meme.lines) //why doesnt work with one
+}
+
+// The next 2 functions handle IMAGE UPLOADING to img tag from file system:
+function onImgInput(ev) {
+    loadImageFromInput(ev, renderImg)
+}
+
+function loadImageFromInput(ev, onImageReady) {
+    const reader = new FileReader()
+    reader.onload = (event) => {
+        let img = new Image() 
+        img.src = event.target.result 
+        const imgId = addUserImg(img.src)
+        onImgSelect(imgId)
+        img.onload = () => onImageReady(img)
+    }
+    reader.readAsDataURL(ev.target.files[0]) 
 }
 
 function renderImg(img) {
@@ -172,3 +190,4 @@ function onSaveMeme() {
     saveMeme()
 }
 
+``

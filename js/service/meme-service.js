@@ -261,3 +261,10 @@ function _createImage(url, keywords = []) {
     return { id: makeId(), url, keywords }
 }
 
+function addUserImg(url){
+    const img = _createImage(url)
+    gImgs.push(img)
+    console.log(gImgs);
+    return img.id
+}
+
