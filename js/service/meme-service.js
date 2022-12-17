@@ -8,6 +8,7 @@ const IMG_KEY = 'imgDB'
 var gImgs
 var gMeme
 var gMyMemes
+var gFilter
 var gRandLines = ['love it', 'maybe', 'that what I like', 'that what she said', 'cheers']
 
 function initService() {
@@ -15,6 +16,10 @@ function initService() {
     createMeme()
     createMyMemes()
     getKeywords()
+}
+
+function setFilter(word) {
+    gFilter = word
 }
 
 function createMyMemes() {
@@ -52,7 +57,13 @@ function getMyMemes() {
 }
 
 function getImgs() {
-    return gImgs
+    var imgs = gImgs
+    console.log(gFilter)
+    if (gFilter) {
+        imgs = imgs.filter(img => img.keywords.find(keyword => keyword.includes(gFilter)))
+    }
+    console.log(imgs)
+    return imgs
 }
 
 function setImg(imgId, idx) {
@@ -214,7 +225,6 @@ function getKeywords() {
         }, acc)
         return acc
     }, [])
-    console.log(allKeywords)
     return allKeywords
 }
 
@@ -250,3 +260,5 @@ function createImages() {
 function _createImage(url, keywords = []) {
     return { id: makeId(), url, keywords }
 }
+
+``

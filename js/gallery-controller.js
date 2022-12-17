@@ -2,6 +2,7 @@
 
 function renderGallery() {
     const imgs = getImgs()
+    console.log(imgs);
     var strHTMLs = imgs.map(img => {
         const { url, id } = img
         return `<div class="img-container" onclick="onImgSelect('${id}')">
@@ -48,6 +49,12 @@ function renderDataList(){
     var strHTMLs = keywords.map(keyword =>`<option value="${keyword}">`)
     const elDatalist = document.querySelector('datalist')
     elDatalist.innerHTML = strHTMLs.join('')
+}
+
+function onSearch(ev,searchWord){
+    ev.preventDefault()
+    setFilter(searchWord)
+    renderGallery()
 }
 
 

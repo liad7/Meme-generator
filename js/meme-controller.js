@@ -6,6 +6,7 @@ const gMarkclr = '#7877778d'
 var gElCanvas
 var gCtx
 
+
 function onInit() {
     initService()
     gElCanvas = document.querySelector('canvas')
@@ -15,6 +16,7 @@ function onInit() {
         resizeCanvas()
     })
 }
+
 
 function onToggleMenu() {
     document.body.classList.toggle('menu-open')

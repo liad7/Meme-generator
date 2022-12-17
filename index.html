@@ -26,7 +26,7 @@
 
     <main class="gallery-container">
         <div class="search-bar">
-            <input list="search-data" type="text" onchange="onSearch(event,value)" placeholder="Search">
+            <input list="search-data" type="text" oninput="onSearch(event,value)" placeholder="Search">
             <datalist id="search-data"></datalist>
             <button onclick="onRandomMeme()">I'm flexable</button>
             <button>More</button>
