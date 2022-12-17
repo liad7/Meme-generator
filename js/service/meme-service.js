@@ -230,8 +230,8 @@ function createImages() {
     var imgs = _loadImgsFromStorage()
     if (!imgs) {
         imgs = [
-            _createImage('./Meme-generator/main/assets/1.jpg', ['trump', 'celeb']),
-            _createImage('./Meme-generator/main/assets/2.jpg', ['dog', 'cute', 'animal']),
+            _createImage('./Meme-generator/assets/1.jpg', ['trump', 'celeb']),
+            _createImage('./Meme-generator/assets/2.jpg', ['dog', 'cute', 'animal']),
             _createImage('./Meme-generator/main/assets/3.jpg', ['dog', 'cute', 'animal', 'tierd', 'baby']),
             _createImage('./Meme-generator/main/assets/4.jpg', ['cute', 'animal', 'tierd', 'cat']),
             _createImage('./Meme-generator/main/assets/5.jpg', ['sucsses', 'baby', 'cute']),
