@@ -27,8 +27,6 @@ header .logo img {
     font-family: poppins;
     align-self: center;
     justify-self: center;
-    /* height: 100px; */
-    /* width: 100px; */
     width: fit-content;
     color: var(--clr3);
     font-size: 1.5em;
@@ -59,7 +57,6 @@ header .logo img {
     background-color: inherit;
     border: none;
     font-size: 2rem;
-    /* color: white; */
 }
 
 @media (max-width: 790px) {
@@ -69,7 +66,6 @@ header .logo img {
 
     header .logo img {
         height: 30px;
-        /* height: 1.5em; */
     }
 
     .main-nav {
@@ -83,7 +79,6 @@ header .logo img {
         border-radius: 2em;
         background: var(--clr0);
         align-items: center;
-        /*border-inline-start: 1px solid #ccc; */
         min-width: 200px;
         transform: translateX(100%);
         transition: transform .6s, box-shadow .6s;

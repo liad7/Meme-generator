@@ -2,7 +2,6 @@
 
 function renderGallery() {
     const imgs = getImgs()
-    console.log(imgs);
     var strHTMLs = imgs.map(img => {
         const { url, id } = img
         return `<div class="img-container" onclick="onImgSelect('${id}')">
@@ -17,10 +16,8 @@ function renderGallery() {
 function onImgSelect(imgId,idx) {
     openEditor()
     setImg(imgId,idx)
-    // setMeme(imgId,idx)
     resizeCanvas()
     clearEditor()
-    // renderMeme()
 }
 
 function openEditor() {
@@ -40,7 +37,6 @@ function onOpenGallery() {
 function clearEditor() {
     document.querySelector('input[name="text"]').value = ''
     const elColors = Array.from(document.querySelectorAll('input[type="color"]'))
-    console.log(elColors)
     elColors.forEach(elColor => elColor.value = '#000000')
 }
 

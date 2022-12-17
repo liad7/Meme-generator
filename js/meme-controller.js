@@ -14,14 +14,10 @@ function onInit() {
     gCtx = gElCanvas.getContext('2d')
     renderGallery()
     addListeners()
-    // window.addEventListener('resize', () => {
-    //     resizeCanvas()
-    // })
 }
 function addListeners() {
     addMouseListeners()
     addTouchListeners()
-    //Listen for resize ev
     window.addEventListener('resize', () => {
         resizeCanvas()
     })
@@ -78,7 +74,7 @@ function getEvPos(ev) {
         y: ev.offsetY,
     }
     if (TOUCH_EVS.includes(ev.type)) {
-        console.log('ev:', ev)
+
         ev.preventDefault()
         ev = ev.changedTouches[0]
         pos = {
@@ -156,7 +152,7 @@ function markSelctedLine(meme, color) {
     const { lines, selectedLineIdx } = meme
     const { size, y, id, align } = lines[selectedLineIdx]
     const posY = y ? y : getPos(id, align).y
-    console.log(posY - (size / 2), posY + (size / 2))
+
 
     drawRect(0, posY - (size / 2), gElCanvas.width, size * 1.2, color)
 
@@ -237,7 +233,7 @@ function onSetAlign(align) {
 }
 
 function onSetFont(fontStyle) {
-    console.log(fontStyle)
+
     setFont(fontStyle)
     renderMeme(true)
 }

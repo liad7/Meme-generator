@@ -27,7 +27,6 @@ function createRandomLine() {
 function getLineClicked(clickedPos) {
     const { y } = clickedPos
     const lines = getMeme().lines
-    // const { offsetX, offsetY, pageX, pageY } = ev
     const clickedLine = lines.find(line => {
         return (
             y >= line.y - (line.size/2) && y <= line.y + (line.size/2)
@@ -41,7 +40,6 @@ function getLineClicked(clickedPos) {
 function moveLine(dx, dy) {
     gDragLine.x += dx
     gDragLine.y += dy
-    console.log(dx,dy);
     gDragLine.align = 'center'
     gDragLine.fixed = true
 

@@ -133,12 +133,14 @@ button.edit-btn.switch {
 }
 
 .increase {
-    background-image: url('/ICONS/increase-font.png');
+    /* background: url('ICONS/increase-font.png');  */
+    background: url('/./ICONS/increase-font.png'); 
     background-size: cover;
 }
 
 .decrease {
-    background-image: url('/ICONS/decrease-font.png');
+    /* background: url('ICONS/decrease-font.png'); */
+    background: url('/./ICONS/decrease-font.png');
     background-size: cover;
 }
 

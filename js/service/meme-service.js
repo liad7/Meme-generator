@@ -37,7 +37,6 @@ function createMeme() {
             selectedLineIdx: null,
             lines: []
         }
-        console.log(gMeme)
     }
     gMeme = meme
     _saveMemeToStorage()
@@ -262,7 +261,6 @@ function _createImage(url, keywords = []) {
 function addUserImg(url){
     const img = _createImage(url)
     gImgs.push(img)
-    console.log(gImgs);
     return img.id
 }
 
