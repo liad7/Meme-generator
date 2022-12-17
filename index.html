@@ -12,7 +12,7 @@
 <body onload="onInit()" class="main-layout">
     <header class="flex align-center space-between">
         <div class="logo">
-            <img src="./LOGO/LOGO.png">
+            <img src="LOGO/LOGO.png">
         </div>
         <nav class="main-nav">
             <button class="close-menu-btn" onclick="onToggleMenu()">✖️</button>
@@ -21,16 +21,14 @@
             <a href="#">About</a>
         </nav>
         <button class="open-menu-btn" onclick="onToggleMenu()">☰</button>
-        <!-- style="display: none;" -->
     </header>
 
     <main class="gallery-container">
         <div class="search-bar">
+            <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)">
             <input list="search-data" type="text" oninput="onSearch(event,value)" placeholder="Search">
             <datalist id="search-data"></datalist>
             <button onclick="onRandomMeme()">I'm flexable</button>
-            <input type="file" class="file-input btn" name="image" onchange="onImgInput(event)">
-            <button>More</button>
         </div>
         <section class="imgs-container scroll"></section>
     </main>
@@ -79,5 +77,7 @@
 </body>
 
 </html>
+
+`
 
 

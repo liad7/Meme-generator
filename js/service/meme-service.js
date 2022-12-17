@@ -231,24 +231,24 @@ function createImages() {
     var imgs = _loadImgsFromStorage()
     if (!imgs) {
         imgs = [
-            _createImage('./meme-imgs/1.jpg', ['trump', 'celeb']),
-            _createImage('./meme-imgs/2.jpg', ['dog', 'cute', 'animal']),
-            _createImage('./meme-imgs/3.jpg', ['dog', 'cute', 'animal', 'tierd', 'baby']),
-            _createImage('./meme-imgs/4.jpg', ['cute', 'animal', 'tierd', 'cat']),
-            _createImage('./meme-imgs/5.jpg', ['sucsses', 'baby', 'cute']),
-            _createImage('./meme-imgs/6.jpg', ['aliens', 'history', 'guy']),
-            _createImage('./meme-imgs/7.jpg', ['funny', 'cute', 'baby', 'supriesed']),
-            _createImage('./meme-imgs/8.jpg', ['willi', 'tell']),
-            _createImage('./meme-imgs/9.jpg', ['evil', 'cute', 'baby', 'laugh']),
-            _createImage('./meme-imgs/10.jpg', ['obama', 'laugh', 'smile', 'celeb']),
-            _createImage('./meme-imgs/11.jpg', ['kiss', 'guy', 'basketball']),
-            _createImage('./meme-imgs/12.jpg', ['finger', 'point']),
-            _createImage('./meme-imgs/13.jpg', ['decaprio', 'cheers', 'smile']),
-            _createImage('./meme-imgs/14.jpg', ['matrix', 'sunglasses']),
-            _createImage('./meme-imgs/15.jpg', ['mordor', 'guy', 'rings', 'lord']),
-            _createImage('./meme-imgs/16.jpg', ['guy', 'star', 'smile']),
-            _createImage('./meme-imgs/17.jpg', ['putin', 'suit', 'two']),
-            _createImage('./meme-imgs/18.jpg', ['toy', 'buzz', 'woddy']),
+            _createImage('meme-imgs/1.jpg', ['trump', 'celeb']),
+            _createImage('meme-imgs/2.jpg', ['dog', 'cute', 'animal']),
+            _createImage('meme-imgs/3.jpg', ['dog', 'cute', 'animal', 'tierd', 'baby']),
+            _createImage('meme-imgs/4.jpg', ['cute', 'animal', 'tierd', 'cat']),
+            _createImage('meme-imgs/5.jpg', ['sucsses', 'baby', 'cute']),
+            _createImage('meme-imgs/6.jpg', ['aliens', 'history', 'guy']),
+            _createImage('meme-imgs/7.jpg', ['funny', 'cute', 'baby', 'supriesed']),
+            _createImage('meme-imgs/8.jpg', ['willi', 'tell']),
+            _createImage('meme-imgs/9.jpg', ['evil', 'cute', 'baby', 'laugh']),
+            _createImage('meme-imgs/10.jpg', ['obama', 'laugh', 'smile', 'celeb']),
+            _createImage('meme-imgs/11.jpg', ['kiss', 'guy', 'basketball']),
+            _createImage('meme-imgs/12.jpg', ['finger', 'point']),
+            _createImage('meme-imgs/13.jpg', ['decaprio', 'cheers', 'smile']),
+            _createImage('meme-imgs/14.jpg', ['matrix', 'sunglasses']),
+            _createImage('meme-imgs/15.jpg', ['mordor', 'guy', 'rings', 'lord']),
+            _createImage('meme-imgs/16.jpg', ['guy', 'star', 'smile']),
+            _createImage('meme-imgs/17.jpg', ['putin', 'suit', 'two']),
+            _createImage('meme-imgs/18.jpg', ['toy', 'buzz', 'woddy']),
         ]
     }
     gImgs = imgs
@@ -266,5 +266,5 @@ function addUserImg(url){
     return img.id
 }
 
-``
+
 

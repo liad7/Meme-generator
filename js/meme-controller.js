@@ -139,10 +139,9 @@ function renderTexts(lines) {
 
 function resizeCanvas() {  //not sure about this func
     const elContainer = document.querySelector('.editor')
-    const size = elContainer.offsetWidth > elContainer.offsetHeight ? elContainer.offsetWidth : elContainer.offsetHeight
-    gElCanvas.height = gElCanvas.width = size / 2 - 50
-    // gElCanvas.height = gElCanvas.width = elContainer.offsetWidth / 2 - 50
-    // gElCanvas.height = gElCanvas.width = elContainer.offsetWidth / 2 - 20
+    var size = elContainer.offsetWidth > elContainer.offsetHeight ? elContainer.offsetWidth : elContainer.offsetHeight
+    size = size / 2 > elContainer.offsetWidth ? elContainer.offsetWidth : size / 2
+    gElCanvas.height = gElCanvas.width = size - 50
     renderMeme(true)
 }
 
@@ -157,9 +156,9 @@ function markSelctedLine(meme, color) {
     const { lines, selectedLineIdx } = meme
     const { size, y, id, align } = lines[selectedLineIdx]
     const posY = y ? y : getPos(id, align).y
-    console.log(posY - (size / 2),posY + (size / 2));
+    console.log(posY - (size / 2), posY + (size / 2))
 
-    drawRect(0, posY - (size / 2), gElCanvas.width, size*1.2 , color)
+    drawRect(0, posY - (size / 2), gElCanvas.width, size * 1.2, color)
 
 }
 
@@ -170,14 +169,14 @@ function drawRect(x, y, endX, endY, color) {
 }
 
 function drawText(line) {
-    const { txt, size, align, color, id, font, stroke, isDrag,fixed } = line
+    const { txt, size, align, color, id, font, stroke, isDrag, fixed } = line
     gCtx.lineWidth = 2
     gCtx.strokeStyle = stroke
     gCtx.fillStyle = color
     gCtx.font = `${size}px ${font}`
     var { x, y } = getPos(id, align)
-    if (fixed) var {x,y} = line
-    if(isDrag) var { x, y } = gStartPos
+    if (fixed) var { x, y } = line
+    if (isDrag) var { x, y } = gStartPos
     Object.assign(line, { y, x })
 
     gCtx.textAlign = align
@@ -264,4 +263,3 @@ function onSaveMeme() {
     saveMeme()
 }
 
-``
