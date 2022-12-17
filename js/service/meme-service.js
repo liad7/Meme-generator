@@ -35,7 +35,7 @@ function createMeme() {
         meme = {
             selectedImgId: null,
             selectedLineIdx: null,
-            lines: [createLine()]
+            lines: []
         }
         console.log(gMeme)
     }
@@ -175,7 +175,7 @@ function randomMeme() {
         line.txt = gRandLines[idx]
         randLines.push(line)
     }
-    return setMeme(img.id, 1, randLines)
+    return setMeme(img.id, randLines, 1)
 }
 
 function saveMeme() {
@@ -261,4 +261,3 @@ function _createImage(url, keywords = []) {
     return { id: makeId(), url, keywords }
 }
 
-``

@@ -67,6 +67,7 @@ function onSetLineTxt(ev, txt) {
 function markSelctedLine(meme, color) {
     const { lines, selectedLineIdx } = meme
     console.log(lines[selectedLineIdx])
+    console.log(lines)
     const { size, y, id, align } = lines[selectedLineIdx]
     const posY = y ? y : getPos(id, align).y
     drawRect(0, posY - (size / 2), gElCanvas.width, posY + (size / 2), color)
