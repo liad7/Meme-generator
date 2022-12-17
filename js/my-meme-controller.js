@@ -1,6 +1,6 @@
 'use strict'
 
-function renderMyMeme() { 
+function renderMyMeme() { //change the func the img call
     const myMemes = getMyMemes()
     var strHTMLs = myMemes.map((meme, idx) => {
         const { selectedImgId, lines } = meme
