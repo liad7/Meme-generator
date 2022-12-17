@@ -1,8 +1,9 @@
 'use strict'
 
-
+const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 const gMarkclr = '#7877778d'
 
+var gStartPos
 var gElCanvas
 var gCtx
 
@@ -12,9 +13,80 @@ function onInit() {
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
     renderGallery()
+    addListeners()
+    // window.addEventListener('resize', () => {
+    //     resizeCanvas()
+    // })
+}
+function addListeners() {
+    addMouseListeners()
+    addTouchListeners()
+    //Listen for resize ev
     window.addEventListener('resize', () => {
         resizeCanvas()
     })
+}
+
+function addMouseListeners() {
+    gElCanvas.addEventListener('mousemove', onMove)
+    gElCanvas.addEventListener('mousedown', onDown)
+    gElCanvas.addEventListener('mouseup', onUp)
+}
+
+function addTouchListeners() {
+    gElCanvas.addEventListener('touchmove', onMove)
+    gElCanvas.addEventListener('touchstart', onDown)
+    gElCanvas.addEventListener('touchend', onUp)
+}
+function onDown(ev) {
+    // Get the ev pos from mouse or touch
+    const pos = getEvPos(ev)
+    const line = getLineClicked(pos)
+    if (!line) return
+
+    setLineDrag(true)
+    gStartPos = pos
+    document.body.style.cursor = 'grabbing'
+}
+
+function onMove(ev) {
+    const line = getDragLine()
+
+    if (!line) return
+
+    const pos = getEvPos(ev)
+    // Calc the delta , the diff we moved
+    const dx = pos.x - gStartPos.x
+    const dy = pos.y - gStartPos.y
+    moveLine(dx, dy)
+    gStartPos = pos
+    renderMeme(true)
+}
+
+function onUp() {
+    const line = getDragLine()
+    if (!line) return
+
+    setLineDrag(false)
+    clearDragLine()
+    document.body.style.cursor = 'grab'
+}
+
+function getEvPos(ev) {
+    var pos = {
+        x: ev.offsetX,
+        y: ev.offsetY,
+    }
+    if (TOUCH_EVS.includes(ev.type)) {
+        console.log('ev:', ev)
+        ev.preventDefault()
+        ev = ev.changedTouches[0]
+        pos = {
+            x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+            y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
+        }
+    }
+    return pos
 }
 
 
@@ -30,7 +102,6 @@ function renderMeme(isMark) {
     const meme = getMeme()
     const img = new Image()
     img.src = getImgUrl()
-    console.log(getImgs());
     img.onload = () => {
         renderImg(img)
         if (isMark) markSelctedLine(meme, gMarkclr)
@@ -47,13 +118,13 @@ function onImgInput(ev) {
 function loadImageFromInput(ev, onImageReady) {
     const reader = new FileReader()
     reader.onload = (event) => {
-        let img = new Image() 
-        img.src = event.target.result 
+        let img = new Image()
+        img.src = event.target.result
         const imgId = addUserImg(img.src)
         onImgSelect(imgId)
         img.onload = () => onImageReady(img)
     }
-    reader.readAsDataURL(ev.target.files[0]) 
+    reader.readAsDataURL(ev.target.files[0])
 }
 
 function renderImg(img) {
@@ -84,11 +155,11 @@ function onSetLineTxt(ev, txt) {
 
 function markSelctedLine(meme, color) {
     const { lines, selectedLineIdx } = meme
-    console.log(lines[selectedLineIdx])
-    console.log(lines)
     const { size, y, id, align } = lines[selectedLineIdx]
     const posY = y ? y : getPos(id, align).y
-    drawRect(0, posY - (size / 2), gElCanvas.width, posY + (size / 2), color)
+    console.log(posY - (size / 2),posY + (size / 2));
+
+    drawRect(0, posY - (size / 2), gElCanvas.width, size*1.2 , color)
 
 }
 
@@ -99,14 +170,16 @@ function drawRect(x, y, endX, endY, color) {
 }
 
 function drawText(line) {
-    const { txt, size, align, color, id, font, stroke } = line
+    const { txt, size, align, color, id, font, stroke, isDrag,fixed } = line
     gCtx.lineWidth = 2
     gCtx.strokeStyle = stroke
     gCtx.fillStyle = color
     gCtx.font = `${size}px ${font}`
-
-    const { x, y } = getPos(id, align)
+    var { x, y } = getPos(id, align)
+    if (fixed) var {x,y} = line
+    if(isDrag) var { x, y } = gStartPos
     Object.assign(line, { y, x })
+
     gCtx.textAlign = align
     gCtx.textBaseline = 'middle'
     gCtx.fillText(txt, x, y)
@@ -117,6 +190,7 @@ function drawText(line) {
 
 function onSwitchLine() {
     document.querySelector('input[name="text"]').value = switchLine()
+    renderMeme(true)
 }
 
 function getPos(lineId, align) {

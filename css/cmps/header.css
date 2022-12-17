@@ -63,6 +63,14 @@ header .logo img {
 }
 
 @media (max-width: 790px) {
+    header {
+        min-width: 200px;
+    }
+
+    header .logo img {
+        height: 1.5em;
+    }
+
     .main-nav {
         position: fixed;
         z-index: 2;

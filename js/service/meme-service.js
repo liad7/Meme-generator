@@ -58,11 +58,9 @@ function getMyMemes() {
 
 function getImgs() {
     var imgs = gImgs
-    console.log(gFilter)
     if (gFilter) {
         imgs = imgs.filter(img => img.keywords.find(keyword => keyword.includes(gFilter)))
     }
-    console.log(imgs)
     return imgs
 }
 
@@ -106,9 +104,9 @@ function isFirst(lines, idx) {  //check if it's the user first time edit this im
 
 function switchLine() {
     const { lines } = gMeme
+
     gMeme.selectedLineIdx++
     if (gMeme.selectedLineIdx > lines.length - 1) gMeme.selectedLineIdx = 0
-    console.log('curr line', gMeme.selectedLineIdx)
     return lines[gMeme.selectedLineIdx].txt
 }
 
@@ -267,4 +265,6 @@ function addUserImg(url){
     console.log(gImgs);
     return img.id
 }
+
+``
 
