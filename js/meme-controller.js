@@ -1,5 +1,8 @@
 'use strict'
 
+
+const gMarkclr = '#7877778d'
+
 var gElCanvas
 var gCtx
 
@@ -13,20 +16,21 @@ function onInit() {
     })
 }
 
-function onToggleMenu(){
+function onToggleMenu() {
     document.body.classList.toggle('menu-open')
 }
 
-function closeMenu(){
+function closeMenu() {
     document.body.classList.remove('menu-open')
 }
 
-function renderMeme() {
+function renderMeme(isMark) {
     const meme = getMeme()
     const img = new Image()
     img.src = getImgUrl()
     img.onload = () => {
         renderImg(img)
+        if (isMark) markSelctedLine(meme, gMarkclr)
         renderTexts(meme.lines)  ///why doesnt work with one
     }
     // renderTexts(meme.lines) //why doesnt work with one
@@ -44,16 +48,33 @@ function renderTexts(lines) {
 
 function resizeCanvas() {  //not sure about this func
     const elContainer = document.querySelector('.editor')
-    gElCanvas.height = gElCanvas.width = elContainer.offsetWidth / 2 - 50
+    const size = elContainer.offsetWidth > elContainer.offsetHeight ? elContainer.offsetWidth : elContainer.offsetHeight
+    gElCanvas.height = gElCanvas.width = size / 2 - 50
+    // gElCanvas.height = gElCanvas.width = elContainer.offsetWidth / 2 - 50
     // gElCanvas.height = gElCanvas.width = elContainer.offsetWidth / 2 - 20
-    renderMeme()
+    renderMeme(true)
 }
 
 function onSetLineTxt(ev, txt) {
     ev.preventDefault()
     const line = setLineTxt(txt)
-    renderMeme()
+    renderMeme(true)
 
+}
+
+function markSelctedLine(meme, color) {
+    const { lines, selectedLineIdx } = meme
+    console.log(lines[selectedLineIdx])
+    const { size, y, id, align } = lines[selectedLineIdx]
+    const posY = y ? y : getPos(id, align).y
+    drawRect(0, posY - (size / 2), gElCanvas.width, posY + (size / 2), color)
+
+}
+
+function drawRect(x, y, endX, endY, color) {
+    gCtx.beginPath()
+    gCtx.fillStyle = color
+    gCtx.fillRect(x, y, endX, endY)
 }
 
 function drawText(line) {
@@ -64,6 +85,7 @@ function drawText(line) {
     gCtx.font = `${size}px ${font}`
 
     const { x, y } = getPos(id, align)
+    Object.assign(line, { y, x })
     gCtx.textAlign = align
     gCtx.textBaseline = 'middle'
     gCtx.fillText(txt, x, y)
@@ -102,46 +124,48 @@ function getPos(lineId, align) {
 function onNewLine() {
     document.querySelector('input[name="text"]').value = ''
     newLine()
+    renderMeme(true)
 }
 
 function onSetColor(color) {
     setColor(color)
-    renderMeme()
+    renderMeme(true)
 }
 
 function onSetSize(diff) {
     setSize(diff)
-    renderMeme()
+    renderMeme(true)
 }
 
 function onSetAlign(align) {
     setAlign(align)
-    renderMeme()
+    renderMeme(true)
 }
 
 function onSetFont(fontStyle) {
     console.log(fontStyle)
     setFont(fontStyle)
-    renderMeme()
+    renderMeme(true)
 }
 
 function onSetStrokeColor(color) {
     setStrokeColor(color)
-    renderMeme()
+    renderMeme(true)
 }
 
 function onDeleteLine() {
     deleteLine()
-    renderMeme()
+    renderMeme(true)
 }
 
-function onRandomMeme(){
+function onRandomMeme() {
     randomMeme()
     openEditor()
-    renderMeme()
+    renderMeme(true)
 }
 
-function onSaveMeme(){
+function onSaveMeme() {
+    renderMeme(false)
     saveMeme()
 }
 

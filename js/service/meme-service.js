@@ -5,7 +5,7 @@ const MEME_KEY = 'memeDB'
 const MY_MEME_KEY = 'myMemesDB'
 const IMG_KEY = 'imgDB'
 
-var gImgs 
+var gImgs
 var gMeme
 var gMyMemes
 var gRandLines = ['love it', 'maybe', 'that what I like', 'that what she said', 'cheers']
@@ -30,7 +30,7 @@ function createMeme() {
         meme = {
             selectedImgId: null,
             selectedLineIdx: null,
-            lines: []
+            lines: [createLine()]
         }
         console.log(gMeme)
     }
@@ -63,7 +63,7 @@ function setImg(imgId, idx) {
     return setMeme(imgId)
 }
 
-function setMeme(selectedImgId, lines = [], selectedLineIdx = 0) {
+function setMeme(selectedImgId, lines = [createLine()], selectedLineIdx = 0) {
     const meme = {
         selectedImgId,
         selectedLineIdx,
@@ -75,23 +75,22 @@ function setMeme(selectedImgId, lines = [], selectedLineIdx = 0) {
 }
 
 function getImgById(imgId) {
-    // if(!imgId) return null
     const img = gImgs.find(img => imgId === img.id)
     return img
 }
 
-// function setLineTxt(txt) {
-//     const line = createLine(txt)
-//     _saveMemeToStorage()
-//     return line
-// }
-
 function setLineTxt(txt) {
     const { lines, selectedLineIdx } = gMeme
-    if (!lines[selectedLineIdx]) lines[selectedLineIdx] = createLine()
+
+    if (isFirst(lines, selectedLineIdx)) lines[selectedLineIdx] = createLine()
     lines[selectedLineIdx].txt = txt
     _saveMemeToStorage()
     return lines[selectedLineIdx]
+}
+
+function isFirst(lines, idx) {  //check if it's the user first time edit this img
+    if (!lines[idx] && idx === 0) return true
+    return false
 }
 
 function switchLine() {
@@ -103,10 +102,12 @@ function switchLine() {
 }
 
 function newLine() {
-    console.log(gMeme.selectedLineIdx)
-    if (!gMeme.lines[gMeme.selectedLineIdx]) return
-    gMeme.selectedLineIdx++
-    console.log(gMeme.selectedLineIdx)
+    const { lines } = gMeme
+    const length = lines.length
+    const txt = lines[length - 1].txt
+    if (!txt || txt === 'Put your text here') return
+    gMeme.selectedLineIdx = length
+    lines[length] = createLine()
     _saveMemeToStorage()
 }
 
@@ -191,7 +192,7 @@ function _loadMyMemesFromStorage() {
     return loadFromStorage(MY_MEME_KEY)
 }
 
-function clearMyMeme(){
+function clearMyMeme() {
     gMyMemes = []
     _saveMyMemesToStorage()
 }
@@ -205,15 +206,15 @@ function _loadImgsFromStorage() {
     return loadFromStorage(IMG_KEY)
 }
 
-function getKeywords(){
-    const allKeywords = gImgs.reduce((acc,img) => {
-        img.keywords.reduce((acc,keyword) => {
-            if(!acc.includes(keyword)) acc.push(keyword)
+function getKeywords() {
+    const allKeywords = gImgs.reduce((acc, img) => {
+        img.keywords.reduce((acc, keyword) => {
+            if (!acc.includes(keyword)) acc.push(keyword)
             return acc
-        },acc)
+        }, acc)
         return acc
-    },[])
-    console.log(allKeywords);
+    }, [])
+    console.log(allKeywords)
     return allKeywords
 }
 
@@ -246,6 +247,6 @@ function createImages() {
     _saveImgsToStorage()
 }
 
-function _createImage(url, keywords=[]) {
+function _createImage(url, keywords = []) {
     return { id: makeId(), url, keywords }
 }
