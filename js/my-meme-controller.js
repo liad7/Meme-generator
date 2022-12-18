@@ -45,3 +45,10 @@ function doUploadImg(imgDataUrl, onSuccess) {
         .then(url => onSuccess(url))
 }
 
+function downloadImg(elLink) {
+    renderMeme(false)
+    console.log(elLink.href);
+    const imgContent = gElCanvas.toDataURL('image/png') // image/jpeg the default format
+    elLink.href = imgContent
+}
+

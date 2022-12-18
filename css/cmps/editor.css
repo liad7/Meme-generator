@@ -111,7 +111,7 @@ button.edit-btn.switch {
 
 .fa.switch::before {
     color: var(--clr3);
-    content: "\f883";
+    content: "\f07d";
 }
 
 .fa.left::before {
@@ -131,17 +131,11 @@ button.edit-btn.switch {
     border-radius: 1em;
     padding: 1em;
 }
-
-.increase {
-    /* background: url('ICONS/increase-font.png');  */
-    background: url('/./ICONS/increase-font.png'); 
-    background-size: cover;
+.fa.decrease::before {
+    content: "\f035";
 }
-
-.decrease {
-    /* background: url('ICONS/decrease-font.png'); */
-    background: url('/./ICONS/decrease-font.png');
-    background-size: cover;
+.fa.increase::before {
+ content: "\f034";
 }
 
 @media (min-width: 700px) {

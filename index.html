@@ -49,8 +49,8 @@
                 <button onclick="onSetAlign(value)" value="left" class="fa left edit-btn"></button>
                 <button onclick="onSetAlign(value)" value="center" class="fa txt-center edit-btn"></button>
                 <button onclick="onSetAlign(value)" value="right" class="fa right edit-btn"></button>
-                <button class="increase edit-btn" onclick="onSetSize(5)"></button>
-                <button class="decrease edit-btn" onclick="onSetSize(-5)"></button>
+                <button class="fa increase edit-btn" onclick="onSetSize(5)"></button>
+                <button class="fa decrease edit-btn" onclick="onSetSize(-5)"></button>
                 <select onchange="onSetFont(this.value)" class="font-select">
                     <option value="impact">IMPACT</option>
                     <option value="ariel">ARIEL</option>
@@ -61,6 +61,7 @@
                 <input class="txt-color edit-btn" type="color" onchange="onSetColor(value)">
                 <button onclick="onSaveMeme()">Save</button>
                 <button onclick="onShareMeme()">Share</button>
+                <button><a href="#" onclick="downloadImg(this)" download="my-img.png">Download</a></button>
             </section>
         </div>
     </section>
