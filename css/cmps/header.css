@@ -4,7 +4,7 @@ header {
     background-image: var(--clr0);
     margin-bottom: 2em;
     height: 10vh;
-    min-width: 1500px;
+    min-width: 150px;
 }
 
 header .logo img {

@@ -3,7 +3,7 @@
     grid-template-rows: 1fr 2fr;
     gap: 1em;
     padding: 3em 0 0 0;
-    max-width: 90vw;
+    max-width: 100vw;
 }
 
 canvas {
@@ -19,7 +19,7 @@ canvas {
     border-radius: 2em;
     display: grid;
     gap: 2em;
-    padding: 1em;
+    padding: 1em 0;
     height: fit-content;
     align-items: center;
     justify-items: center;
@@ -34,7 +34,7 @@ canvas {
     background-color: var(--clr5);
     border-radius: inherit;
     border: outset 3px #bbc4d1;
-    max-width: 80%;
+    max-width: 50%;
     max-height: 3em;
     justify-self: center;
 }
@@ -50,7 +50,7 @@ canvas {
     grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
     grid-auto-rows: minmax(60px, 1fr);
     grid-row: auto;
-    max-width: 50%;
+    max-width: 80%;
     gap: 10px;
     place-items: center;
 }
@@ -208,5 +208,6 @@ button.edit-btn.switch {
         gap: 5em;
 
         padding: 0 3em;
+        justify-items: center;
     }
 }
