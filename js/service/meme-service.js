@@ -7,25 +7,56 @@ const IMG_KEY = 'imgDB'
 
 var gImgs
 var gMeme
-var gMyMemes
-var gFilter
+var gSavedMemes
+var gSearchFilter
 var gRandLines = ['love it', 'maybe', 'that what I like', 'that what she said', 'cheers']
+var gSettings = { size: 30, align: 'center', color: '#ffffff', font: 'impact', stroke: '#000000' }
+var gFonts = ['impact', 'david', 'ariel', 'sans-sarif']
 
-function initService() {
-    createImages()
-    createMeme()
-    createMyMemes()
-    getKeywords()
+createImages()
+createMeme()
+createMyMemes()
+getKeywords()
+
+
+function getLineClicked(clickedPos) {
+    const { y } = clickedPos
+    console.log(gMeme);
+    console.log(gMeme.lines);
+    const lines = gMeme.lines
+    const clickedLine = lines.find(line => y >= line.y - (line.size / 2) && y <= line.y + (line.size / 2))
+    _saveMemeToStorage()
+    return clickedLine
 }
 
-function setFilter(word) {
-    gFilter = word
+function createLine() {
+    const { lines, selectedLineIdx } = gMeme
+    const { size, align, color, font, stroke } = gSettings
+    const line = { size, align, color, font, stroke, id: makeId(),fixed: false }
+    line.txt = 'Put your text here'
+    lines[selectedLineIdx] = line
+    return line
+}
+
+function createRandomLine() {
+    const { align } = gSettings
+    
+    var idx = getRandomInt(0, gFonts.length)
+    const font = gFonts[idx]
+    const color = getRandomColor()
+    const stroke = getRandomColor()
+    const size = getRandomInt(20, 60)
+    return { size, align, color, font, stroke, id: makeId() }
+}
+
+function setSearchFilter(word) {
+    gSearchFilter = word
 }
 
 function createMyMemes() {
     var myMemes = _loadMyMemesFromStorage()
     if (!myMemes) myMemes = []
-    gMyMemes = myMemes
+    gSavedMemes = myMemes
     _saveMyMemesToStorage()
 }
 
@@ -47,25 +78,17 @@ function getImgUrl() {
     return img.url
 }
 
-function getMeme() {
-    return gMeme
-}
-
-function getMyMemes() {
-    return gMyMemes
-}
-
 function getImgs() {
-    var imgs = gImgs
-    if (gFilter) {
-        imgs = imgs.filter(img => img.keywords.find(keyword => keyword.includes(gFilter)))
+    let imgs = gImgs
+    if (gSearchFilter) {
+        imgs = imgs.filter(img => img.keywords.find(keyword => keyword.includes(gSearchFilter)))
     }
     return imgs
 }
 
 function setImg(imgId, idx) {
     if (idx !== undefined) {
-        const lines = gMyMemes[idx].lines
+        const lines = gSavedMemes[idx].lines
         return setMeme(imgId, lines)
     }
     return setMeme(imgId)
@@ -82,23 +105,32 @@ function setMeme(selectedImgId, lines = [createLine()], selectedLineIdx = 0) {
     return meme
 }
 
+function getMeme() {
+    console.log(gMeme);
+    return gMeme
+}
+
+function getSavedMemes() {
+    return gSavedMemes
+}
+
 function getImgById(imgId) {
     const img = gImgs.find(img => imgId === img.id)
     return img
 }
 
 function setLineTxt(txt) {
-    const { lines, selectedLineIdx } = gMeme
+    if (isFirst()) gMeme.lines[0] = createLine()
+    const line = getCurrLine()
 
-    if (isFirst(lines, selectedLineIdx)) lines[selectedLineIdx] = createLine()
-    lines[selectedLineIdx].txt = txt
+    line.txt = txt
     _saveMemeToStorage()
-    return lines[selectedLineIdx]
+    return line
 }
 
-function isFirst(lines, idx) {  //check if it's the user first time edit this img
-    if (!lines[idx] && idx === 0) return true
-    return false
+function isFirst() {  //check if it's the user first time edit this img
+    const { lines, selectedLineIdx } = gMeme
+    return lines[selectedLineIdx] && !selectedLineIdx
 }
 
 function switchLine() {
@@ -109,11 +141,18 @@ function switchLine() {
     return lines[gMeme.selectedLineIdx].txt
 }
 
+function changeLineIdx(lineId) {
+    gMeme.selectedLineIdx = getLineIdxById(lineId)
+    _saveMemeToStorage()
+}
+
 function newLine() {
     const { lines } = gMeme
     const length = lines.length
     const txt = lines[length - 1].txt
+
     if (!txt || txt === 'Put your text here') return
+
     gMeme.selectedLineIdx = length
     lines[length] = createLine()
     _saveMemeToStorage()
@@ -121,7 +160,11 @@ function newLine() {
 
 function deleteLine() {
     const { lines, selectedLineIdx } = gMeme
+
     lines.splice(selectedLineIdx, 1)
+    gMeme.selectedLineIdx = 0
+    
+    if (!lines.length) lines[0] = createLine()
     _saveMemeToStorage()
 }
 
@@ -129,33 +172,33 @@ function getLineIdxById(lineId) {
     return gMeme.lines.findIndex(line => lineId === line.id)
 }
 
-function setColor(color) {
+function getCurrLine() {
     const { lines, selectedLineIdx } = gMeme
-    lines[selectedLineIdx].color = color
+    return lines[selectedLineIdx]
+}
+
+function setColor(color) {
+    getCurrLine().color = color
     _saveMemeToStorage()
 }
 
 function setAlign(align) {
-    const { lines, selectedLineIdx } = gMeme
-    lines[selectedLineIdx].align = align
+    getCurrLine().align = align
     _saveMemeToStorage()
 }
 
 function setFont(font) {
-    const { lines, selectedLineIdx } = gMeme
-    lines[selectedLineIdx].font = font
+    getCurrLine().font = font
     _saveMemeToStorage()
 }
 
 function setStrokeColor(stroke) {
-    const { lines, selectedLineIdx } = gMeme
-    lines[selectedLineIdx].stroke = stroke
+    getCurrLine().stroke = stroke
     _saveMemeToStorage()
 }
 
 function setSize(diff) {
-    const { lines, selectedLineIdx } = gMeme
-    const line = lines[selectedLineIdx]
+    const line = getCurrLine()
     if (line.size + diff > 100 || line.size + diff < 10) return
     line.size += diff
     _saveMemeToStorage()
@@ -166,7 +209,7 @@ function randomMeme() {
     const img = gImgs[idx]
     const count = getRandomInt(0, 2)
     const randLines = []
-    for (var i = 0; i < 2; i++) {
+    for (var i = 0; i < count; i++) {
         const line = createRandomLine()
         idx = getRandomInt(0, gRandLines.length)
         line.txt = gRandLines[idx]
@@ -176,7 +219,7 @@ function randomMeme() {
 }
 
 function saveMeme() {
-    gMyMemes.push(gMeme)
+    gSavedMemes.push(gMeme)
     _saveMyMemesToStorage()
 }
 
@@ -193,7 +236,7 @@ function _loadMemeFromStorage() {
 
 // my memes 
 function _saveMyMemesToStorage() {
-    saveToStorage(MY_MEME_KEY, gMyMemes)
+    saveToStorage(MY_MEME_KEY, gSavedMemes)
 }
 
 function _loadMyMemesFromStorage() {
@@ -201,9 +244,10 @@ function _loadMyMemesFromStorage() {
 }
 
 function clearMyMeme() {
-    gMyMemes = []
+    gSavedMemes = []
     _saveMyMemesToStorage()
 }
+
 
 // imgs 
 function _saveImgsToStorage() {
@@ -258,7 +302,7 @@ function _createImage(url, keywords = []) {
     return { id: makeId(), url, keywords }
 }
 
-function addUserImg(url){
+function addUserImg(url) {
     const img = _createImage(url)
     gImgs.push(img)
     return img.id

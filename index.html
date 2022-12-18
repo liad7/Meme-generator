@@ -16,8 +16,8 @@
         </div>
         <nav class="main-nav">
             <button class="close-menu-btn" onclick="onToggleMenu()">✖️</button>
-            <a href="#" onclick="onOpenGallery()">Gallery</a>
-            <a href="#" onclick="onOpenMyMeme()">Memes</a>
+            <a href="#" onclick="onOpenSection('gallery')">Gallery</a>
+            <a href="#" onclick="onOpenSection('save')">Memes</a>
             <a href="#">About</a>
         </nav>
         <button class="open-menu-btn" onclick="onToggleMenu()">☰</button>
@@ -57,8 +57,10 @@
                     <option value="david">DAVID</option>
                     <option value="sans-serif">SANS-SARIF</option>
                 </select>
-                <input class="storke-color edit-btn" type="color" onchange="onSetStrokeColor(value)">
-                <input class="txt-color edit-btn" type="color" onchange="onSetColor(value)">
+                <label for="fill-clr">F</label>
+                <input id="fill-clr" class="txt-color edit-btn" type="color" oninput="onSetColor(value)">
+                <label for="stroke-clr">S</label>
+                <input id="storke-clr" class="storke-color edit-btn" type="color" oninput="onSetStrokeColor(value)">
                 <button onclick="onSaveMeme()">Save</button>
                 <button onclick="onShareMeme()">Share</button>
                 <button><a href="#" onclick="downloadImg(this)" download="my-img.png">Download</a></button>
@@ -70,7 +72,7 @@
 
     <script src="js/service/storage-service.js"></script>
     <script src="js/service/utils-service.js"></script>
-    <script src="js/service/canvas-service.js"></script>
+    <!-- <script src="js/service/canvas-service.js"></script> -->
     <script src="js/service/meme-service.js"></script>
     <script src="js/gallery-controller.js"></script>
     <script src="js/my-meme-controller.js"></script>

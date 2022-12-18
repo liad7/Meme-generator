@@ -6,15 +6,18 @@ const gMarkclr = '#7877778d'
 var gStartPos
 var gElCanvas
 var gCtx
+var gIsMark
+var gDragLine
+var gCurrImg
 
-
-function onInit() {
-    initService()
+function openEditor() {
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
-    renderGallery()
+    gIsMark = true
     addListeners()
 }
+
+
 function addListeners() {
     addMouseListeners()
     addTouchListeners()
@@ -34,37 +37,80 @@ function addTouchListeners() {
     gElCanvas.addEventListener('touchstart', onDown)
     gElCanvas.addEventListener('touchend', onUp)
 }
+
+function setCurrImg() {
+    const img = new Image()
+    img.src = getImgUrl()
+    img.onload = () => {
+        gCurrImg = img
+        resizeCanvas()
+    }
+}
+
+function renderMeme() {
+    const meme = getMeme()
+    renderImg(gCurrImg)
+    if (gIsMark) markSelctedLine(meme, gMarkclr)
+    renderLines(meme.lines)
+}
+
+function drawText(line) {
+    const { txt, size, align, color, id, font, stroke, isDrag, fixed } = line
+    gCtx.lineWidth = 2
+    gCtx.strokeStyle = stroke
+    gCtx.fillStyle = color
+    gCtx.font = `${size}px ${font}`
+    var { x, y } = getPos(id, align)
+
+    if (fixed) var { x, y } = line
+
+    if (isDrag) var { x, y } = gStartPos
+
+    line.x = x
+    line.y = y
+    gCtx.textAlign = align
+    gCtx.textBaseline = 'middle'
+    gCtx.fillText(txt, x, y)
+    gCtx.strokeText(txt, x, y)
+}
+
+function moveLine(dx, dy) {
+    gDragLine.x += dx
+    gDragLine.y += dy
+    gDragLine.align = 'center'
+    gDragLine.fixed = true
+
+}
+
 function onDown(ev) {
     // Get the ev pos from mouse or touch
     const pos = getEvPos(ev)
     const line = getLineClicked(pos)
     if (!line) return
-
-    setLineDrag(true)
+    gDragLine = line
+    gDragLine.isDrag = true
+    changeLineIdx(line.id)
     gStartPos = pos
     document.body.style.cursor = 'grabbing'
 }
 
 function onMove(ev) {
-    const line = getDragLine()
-
-    if (!line) return
-
+    if (!gDragLine) return
+    console.log('on move')
     const pos = getEvPos(ev)
     // Calc the delta , the diff we moved
     const dx = pos.x - gStartPos.x
     const dy = pos.y - gStartPos.y
     moveLine(dx, dy)
     gStartPos = pos
-    renderMeme(true)
+    renderMeme()
 }
 
 function onUp() {
-    const line = getDragLine()
-    if (!line) return
+    if (!gDragLine) return
 
-    setLineDrag(false)
-    clearDragLine()
+    gDragLine.isDrag = false
+    gDragLine = null
     document.body.style.cursor = 'grab'
 }
 
@@ -74,7 +120,6 @@ function getEvPos(ev) {
         y: ev.offsetY,
     }
     if (TOUCH_EVS.includes(ev.type)) {
-
         ev.preventDefault()
         ev = ev.changedTouches[0]
         pos = {
@@ -85,25 +130,10 @@ function getEvPos(ev) {
     return pos
 }
 
-
-function onToggleMenu() {
-    document.body.classList.toggle('menu-open')
-}
-
-function closeMenu() {
-    document.body.classList.remove('menu-open')
-}
-
-function renderMeme(isMark) {
-    const meme = getMeme()
-    const img = new Image()
-    img.src = getImgUrl()
-    img.onload = () => {
-        renderImg(img)
-        if (isMark) markSelctedLine(meme, gMarkclr)
-        renderTexts(meme.lines)  ///why doesnt work with one
-    }
-    // renderTexts(meme.lines) //why doesnt work with one
+function clearEditor() {
+    document.querySelector('input[name="text"]').value = ''
+    const elColors = Array.from(document.querySelectorAll('input[type="color"]'))
+    elColors.forEach(elColor => elColor.value = '#000000')
 }
 
 // The next 2 functions handle IMAGE UPLOADING to img tag from file system:
@@ -127,10 +157,33 @@ function renderImg(img) {
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
 }
 
-function renderTexts(lines) {
-    lines.forEach(line => {
-        drawText(line)
-    })
+function downloadImg(elLink) {
+    gIsMark = false
+    renderMeme()
+    const imgContent = gElCanvas.toDataURL('image/png') // image/png the default format
+    elLink.href = imgContent
+    gIsMark = true
+}
+
+function onShareMeme() {
+    const imgDataUrl = gElCanvas.toDataURL('image/jpeg')
+    function onSuccess(uploadedImgUrl) {
+        const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}`)
+    }
+    doUploadImg(imgDataUrl, onSuccess)
+}
+
+function doUploadImg(imgDataUrl, onSuccess) {
+    const formData = new FormData()
+    formData.append('img', imgDataUrl)
+    fetch('//ca-upload.com/here/upload.php', { method: 'POST', body: formData })
+        .then(res => res.text())
+        .then(url => onSuccess(url))
+}
+
+function renderLines(lines) {
+    lines.forEach(line => drawText(line))
 }
 
 function resizeCanvas() {  //not sure about this func
@@ -138,14 +191,13 @@ function resizeCanvas() {  //not sure about this func
     var size = elContainer.offsetWidth > elContainer.offsetHeight ? elContainer.offsetWidth : elContainer.offsetHeight
     size = size / 2 > elContainer.offsetWidth ? elContainer.offsetWidth : size / 2
     gElCanvas.height = gElCanvas.width = size - 50
-    renderMeme(true)
+    renderMeme()
 }
 
 function onSetLineTxt(ev, txt) {
     ev.preventDefault()
     const line = setLineTxt(txt)
-    renderMeme(true)
-
+    renderMeme()
 }
 
 function markSelctedLine(meme, color) {
@@ -153,9 +205,7 @@ function markSelctedLine(meme, color) {
     const { size, y, id, align } = lines[selectedLineIdx]
     const posY = y ? y : getPos(id, align).y
 
-
     drawRect(0, posY - (size / 2), gElCanvas.width, size * 1.2, color)
-
 }
 
 function drawRect(x, y, endX, endY, color) {
@@ -164,28 +214,9 @@ function drawRect(x, y, endX, endY, color) {
     gCtx.fillRect(x, y, endX, endY)
 }
 
-function drawText(line) {
-    const { txt, size, align, color, id, font, stroke, isDrag, fixed } = line
-    gCtx.lineWidth = 2
-    gCtx.strokeStyle = stroke
-    gCtx.fillStyle = color
-    gCtx.font = `${size}px ${font}`
-    var { x, y } = getPos(id, align)
-    if (fixed) var { x, y } = line
-    if (isDrag) var { x, y } = gStartPos
-    Object.assign(line, { y, x })
-
-    gCtx.textAlign = align
-    gCtx.textBaseline = 'middle'
-    gCtx.fillText(txt, x, y)
-    gCtx.strokeText(txt, x, y)
-
-}
-
-
 function onSwitchLine() {
     document.querySelector('input[name="text"]').value = switchLine()
-    renderMeme(true)
+    renderMeme()
 }
 
 function getPos(lineId, align) {
@@ -211,51 +242,52 @@ function getPos(lineId, align) {
     return pos
 }
 
+function onSetAlign(align) {
+    setAlign(align)
+    renderMeme()
+}
+
 function onNewLine() {
     document.querySelector('input[name="text"]').value = ''
     newLine()
-    renderMeme(true)
+    renderMeme()
 }
 
 function onSetColor(color) {
     setColor(color)
-    renderMeme(true)
+    renderMeme()
 }
 
 function onSetSize(diff) {
     setSize(diff)
-    renderMeme(true)
-}
-
-function onSetAlign(align) {
-    setAlign(align)
-    renderMeme(true)
+    renderMeme()
 }
 
 function onSetFont(fontStyle) {
-
     setFont(fontStyle)
-    renderMeme(true)
+    renderMeme()
 }
 
 function onSetStrokeColor(color) {
     setStrokeColor(color)
-    renderMeme(true)
+    renderMeme()
 }
 
 function onDeleteLine() {
     deleteLine()
-    renderMeme(true)
+    renderMeme()
 }
 
 function onRandomMeme() {
     randomMeme()
-    openEditor()
-    renderMeme(true)
+    onOpenSection('edit')
+    renderMeme()
 }
 
 function onSaveMeme() {
-    renderMeme(false)
+    gIsMark = false
+    renderMeme()
     saveMeme()
+    gIsMark = true
 }
 

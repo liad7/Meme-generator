@@ -1,5 +1,10 @@
 'use strict'
 
+
+function onInit() {
+    renderGallery()
+}
+
 function renderGallery() {
     const imgs = getImgs()
     var strHTMLs = imgs.map(img => {
@@ -13,43 +18,58 @@ function renderGallery() {
     renderDataList()
 }
 
-function onImgSelect(imgId,idx) {
-    openEditor()
-    setImg(imgId,idx)
-    resizeCanvas()
+function onImgSelect(imgId, idx) {
+    onOpenSection('edit')
     clearEditor()
+    setImg(imgId, idx)
+    setCurrImg()
 }
 
-function openEditor() {
-    document.querySelector('.gallery-container').style.display = 'none'
-    document.querySelector('.my-meme-container').style.display = 'none'
-    document.querySelector('.editor').style.display = 'grid'
-}
-
-function onOpenGallery() {
-    document.querySelector('.my-meme-container').style.display = 'none'
-    document.querySelector('.editor').style.display = 'none'
-    document.querySelector('.gallery-container').style.display = 'block'
+function onOpenSection(nav) {
+    const elGallery = document.querySelector('.gallery-container')
+    const elEditor = document.querySelector('.editor')
+    const elSavedMemes = document.querySelector('.my-meme-container')
     closeMenu()
-
+    switch (nav) {
+        case 'gallery':
+            elGallery.style.display = 'block'
+            elEditor.style.display = 'none'
+            elSavedMemes.style.display = 'none'
+            renderGallery()
+            break
+        case 'save':
+            elGallery.style.display = 'none'
+            elEditor.style.display = 'none'
+            elSavedMemes.style.display = 'block'
+            renderSavedMemes()
+            break
+        case 'edit':
+            elGallery.style.display = 'none'
+            elEditor.style.display = 'grid'
+            elSavedMemes.style.display = 'none'
+            openEditor()
+            break
+    }
 }
 
-function clearEditor() {
-    document.querySelector('input[name="text"]').value = ''
-    const elColors = Array.from(document.querySelectorAll('input[type="color"]'))
-    elColors.forEach(elColor => elColor.value = '#000000')
+function onToggleMenu() {
+    document.body.classList.toggle('menu-open')
 }
 
-function renderDataList(){
+function closeMenu() {
+    document.body.classList.remove('menu-open')
+}
+
+function renderDataList() {
     const keywords = getKeywords()
-    var strHTMLs = keywords.map(keyword =>`<option value="${keyword}">`)
+    var strHTMLs = keywords.map(keyword => `<option value="${keyword}">`)
     const elDatalist = document.querySelector('datalist')
     elDatalist.innerHTML = strHTMLs.join('')
 }
 
-function onSearch(ev,searchWord){
+function onSearch(ev, searchWord) {
     ev.preventDefault()
-    setFilter(searchWord)
+    setSearchFilter(searchWord)
     renderGallery()
 }
 

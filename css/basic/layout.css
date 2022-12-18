@@ -1,7 +1,6 @@
-.main-layout{
+.main-layout {
     display: grid;
     grid-template-rows: 1fr 4fr 1fr;
     width: 100vw;
     height: 100vh;
-
 }
