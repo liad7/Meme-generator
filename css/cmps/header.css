@@ -4,7 +4,7 @@ header {
     background-image: var(--clr0);
     margin-bottom: 2em;
     height: 10vh;
-    min-width: 200px;
+    min-width: 1500px;
 }
 
 header .logo img {
@@ -63,10 +63,6 @@ img:hover {
 }
 
 @media (max-width: 790px) {
-    /* header {
-        min-width: 200px;
-    } */
-
     header .logo img {
         height: 30px;
     }

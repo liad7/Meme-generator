@@ -83,7 +83,6 @@ function moveLine(dx, dy) {
 }
 
 function onDown(ev) {
-    // Get the ev pos from mouse or touch
     const pos = getEvPos(ev)
     const line = getLineClicked(pos)
     if (!line) return
@@ -98,7 +97,6 @@ function onMove(ev) {
     if (!gDragLine) return
     console.log('on move')
     const pos = getEvPos(ev)
-    // Calc the delta , the diff we moved
     const dx = pos.x - gStartPos.x
     const dy = pos.y - gStartPos.y
     moveLine(dx, dy)
@@ -136,7 +134,6 @@ function clearEditor() {
     elColors.forEach(elColor => elColor.value = '#000000')
 }
 
-// The next 2 functions handle IMAGE UPLOADING to img tag from file system:
 function onImgInput(ev) {
     loadImageFromInput(ev, renderImg)
 }
@@ -160,7 +157,7 @@ function renderImg(img) {
 function downloadImg(elLink) {
     gIsMark = false
     renderMeme()
-    const imgContent = gElCanvas.toDataURL('image/png') // image/png the default format
+    const imgContent = gElCanvas.toDataURL('image/png') 
     elLink.href = imgContent
     gIsMark = true
 }
@@ -186,7 +183,7 @@ function renderLines(lines) {
     lines.forEach(line => drawText(line))
 }
 
-function resizeCanvas() {  //not sure about this func
+function resizeCanvas() {  
     const elContainer = document.querySelector('.editor')
     var size = elContainer.offsetWidth > elContainer.offsetHeight ? elContainer.offsetWidth : elContainer.offsetHeight
     size = size / 2 > elContainer.offsetWidth ? elContainer.offsetWidth : size / 2

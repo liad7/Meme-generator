@@ -51,19 +51,19 @@
                 <button onclick="onSetAlign(value)" value="right" class="fa right edit-btn"></button>
                 <button class="fa increase edit-btn" onclick="onSetSize(5)"></button>
                 <button class="fa decrease edit-btn" onclick="onSetSize(-5)"></button>
+                <input id="fill-clr" class="txt-color" type="color" oninput="onSetColor(value)">
+                <button class="fa fill-color-btn edit-btn"><label for="fill-clr"></label></button>
+                <input id="stroke-clr" class="stroke-color" type="color" oninput="onSetStrokeColor(value)">
+                <button class="fa stroke-color-btn edit-btn"><label for="stroke-clr"></label></button>
+                <button class="fa save-btn edit-btn" onclick="onSaveMeme()"></button>
+                <button class="fa share-btn edit-btn" onclick="onShareMeme()"></button>
+                <button class="fa download-btn edit-btn"><a href="#" onclick="downloadImg(this)" download="my-img.png"></a></button>
                 <select onchange="onSetFont(this.value)" class="font-select">
                     <option value="impact">IMPACT</option>
                     <option value="ariel">ARIEL</option>
                     <option value="david">DAVID</option>
                     <option value="sans-serif">SANS-SARIF</option>
                 </select>
-                <label for="fill-clr">F</label>
-                <input id="fill-clr" class="txt-color edit-btn" type="color" oninput="onSetColor(value)">
-                <label for="stroke-clr">S</label>
-                <input id="storke-clr" class="storke-color edit-btn" type="color" oninput="onSetStrokeColor(value)">
-                <button onclick="onSaveMeme()">Save</button>
-                <button onclick="onShareMeme()">Share</button>
-                <button><a href="#" onclick="downloadImg(this)" download="my-img.png">Download</a></button>
             </section>
         </div>
     </section>
@@ -72,7 +72,6 @@
 
     <script src="js/service/storage-service.js"></script>
     <script src="js/service/utils-service.js"></script>
-    <!-- <script src="js/service/canvas-service.js"></script> -->
     <script src="js/service/meme-service.js"></script>
     <script src="js/gallery-controller.js"></script>
     <script src="js/my-meme-controller.js"></script>
@@ -80,6 +79,7 @@
 </body>
 
 </html>
+
 
 
 
