@@ -155,6 +155,7 @@ function renderImg(img) {
 }
 
 function downloadImg(elLink) {
+    console.log('load');
     gIsMark = false
     renderMeme()
     const imgContent = gElCanvas.toDataURL('image/png')

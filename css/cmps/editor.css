@@ -89,6 +89,11 @@ canvas {
     width: 100%;
 }
 
+.download-btn a {
+    height: 100%;
+    width: 100%;
+}
+
 .controllers .edit-btn {
     height: var(--btn-s);
     width: var(--btn-s);
@@ -103,6 +108,7 @@ canvas {
     font-family: fa;
     font-size: 2em;
     text-shadow: 0px 3px 0 var(--clr7);
+    color: var(--clr1);
 }
 
 /* edit-btn  */
@@ -173,7 +179,7 @@ button.edit-btn.switch {
     content: "\53";
 }
 
-.fa.download-btn::before {
+.fa.download::before {
     content: "\f019";
 }
 
