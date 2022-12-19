@@ -157,7 +157,7 @@ function renderImg(img) {
 function downloadImg(elLink) {
     gIsMark = false
     renderMeme()
-    const imgContent = gElCanvas.toDataURL('image/png') 
+    const imgContent = gElCanvas.toDataURL('image/png')
     elLink.href = imgContent
     gIsMark = true
 }
@@ -183,11 +183,11 @@ function renderLines(lines) {
     lines.forEach(line => drawText(line))
 }
 
-function resizeCanvas() {  
+function resizeCanvas() {
     const elContainer = document.querySelector('.editor')
     var size = elContainer.offsetWidth > elContainer.offsetHeight ? elContainer.offsetWidth : elContainer.offsetHeight
     size = size / 2 > elContainer.offsetWidth ? elContainer.offsetWidth : size / 2
-    gElCanvas.height = gElCanvas.width = size - 50
+    gElCanvas.height = gElCanvas.width = size - 20
     renderMeme()
 }
 
