@@ -47,7 +47,7 @@
 
 @media (max-width: 540px) {
     .imgs-container {
-        display: grid;
+        /* display: grid; */
         grid-template-columns: minmax(100px, 1fr);
     }
 }

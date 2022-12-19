@@ -20,13 +20,19 @@
 
 .my-meme-container .img-meme-container {
     display: grid;
-    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
     gap: 15px;
     grid-auto-flow: dense;
     text-align: center;
     padding: 10px;
-    width: 90vh;
 }
+
+@media (max-width: 540px) {
+    .my-meme-container .img-meme-container {
+        grid-template-columns: minmax(100px, 1fr);
+    }
+}
+
 .img-meme-container .img-container span {
     position: relative;
     bottom: 50%;
