@@ -46,18 +46,18 @@
                 <button class="fa trash edit-btn" onclick="onDeleteLine()"></button>
             </section>
             <section class="font-actions">
-                <button onclick="onSetAlign(value)" value="left" class="fa left edit-btn"></button>
-                <button onclick="onSetAlign(value)" value="center" class="fa txt-center edit-btn"></button>
-                <button onclick="onSetAlign(value)" value="right" class="fa right edit-btn"></button>
+                <button onclick="onSetAlign(value)" value="left" class="fa left edit-btn" title="Align-left"></button>
+                <button onclick="onSetAlign(value)" value="center" class="fa txt-center edit-btn" title="align-center"></button>
+                <button onclick="onSetAlign(value)" value="right" class="fa right edit-btn" title="align-right"></button>
                 <button class="fa increase edit-btn" onclick="onSetSize(5)"></button>
                 <button class="fa decrease edit-btn" onclick="onSetSize(-5)"></button>
                 <input id="fill-clr" class="txt-color" type="color" oninput="onSetColor(value)">
-                <button class="fa fill-color-btn edit-btn"><label for="fill-clr"></label></button>
+                <button class="fa fill-color-btn edit-btn" title="Text-left"><label for="fill-clr"></label></button>
                 <input id="stroke-clr" class="stroke-color" type="color" oninput="onSetStrokeColor(value)">
-                <button class="fa stroke-color-btn edit-btn"><label for="stroke-clr"></label></button>
-                <button class="fa save-btn edit-btn" onclick="onSaveMeme()"></button>
-                <button class="fa share-btn edit-btn" onclick="onShareMeme()"></button>
-                <button class="fa download-btn edit-btn"><a href="#" onclick="downloadImg(this)" download="my-img.png"></a></button>
+                <button class="fa stroke-color-btn edit-btn"><label for="stroke-clr" title="Stroke-color"></label></button>
+                <button class="fa save-btn edit-btn" onclick="onSaveMeme()" title="Save-meme"></button>
+                <button class="fa share-btn edit-btn" onclick="onShareMeme()"  title="Share-meme"></button>
+                <button class="fa download-btn edit-btn" title="Download-meme"><a href="#" onclick="downloadImg(this)" download="my-img.png"></a></button>
                 <select onchange="onSetFont(this.value)" class="font-select">
                     <option value="impact">IMPACT</option>
                     <option value="ariel">ARIEL</option>
@@ -67,7 +67,9 @@
             </section>
         </div>
     </section>
-    <footer></footer>
+    <footer>
+        <p style="color: var(--clr3); text-align: center; padding: 1em 0;">Presented by Liad Gola</p>
+    </footer>
 
 
     <script src="js/service/storage-service.js"></script>
