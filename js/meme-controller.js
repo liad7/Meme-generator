@@ -191,6 +191,7 @@ function resizeCanvas() {
     renderMeme()
 }
 
+
 function onSetLineTxt(ev, txt) {
     ev.preventDefault()
     const line = setLineTxt(txt)
